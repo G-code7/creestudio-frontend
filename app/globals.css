@@ -78,6 +78,49 @@
   }
 }
 
+/* ──────────────────────────────────────────────────────────────
+   Ranuras del broken grid.
+   Cada pieza lleva sus coordenadas por variable, una por breakpoint:
+   --c/--r (1 columna), --c-md/--r-md (2 columnas), --c-lg/--r-lg (3 columnas).
+   Al asignar fila y columna explícitas, las celdas sin imagen conservan
+   su espacio en lugar de colapsar.
+   ────────────────────────────────────────────────────────────── */
+@layer components {
+  .mosaic {
+    display: grid;
+    grid-template-columns: 1fr;
+    column-gap: 32px;
+    row-gap: clamp(120px, 10vw, 200px);
+  }
+
+  .mosaic-slot {
+    grid-column: var(--c);
+    grid-row: var(--r);
+    will-change: transform;
+  }
+
+  @media (min-width: 640px) {
+    .mosaic {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .mosaic-slot {
+      grid-column: var(--c-md);
+      grid-row: var(--r-md);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .mosaic {
+      grid-template-columns: repeat(3, 1fr);
+      column-gap: 40px;
+    }
+    .mosaic-slot {
+      grid-column: var(--c-lg);
+      grid-row: var(--r-lg);
+    }
+  }
+}
+
 /* Accesibilidad: respeta a quien pidió menos movimiento */
 @media (prefers-reduced-motion: reduce) {
   *,
