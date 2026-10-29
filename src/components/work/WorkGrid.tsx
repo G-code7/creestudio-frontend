@@ -1,26 +1,14 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Locale } from "@/src/content/config";
 import type { Dictionary } from "@/src/content/types";
 import type { Project } from "@/src/data/projects";
 import { localizePath } from "@/src/lib/i18n";
-import ProjectImage from "./ProjectImage";
-
-/*
- * Rejilla asimétrica en ciclos de 4: ancho/estrecho, estrecho/ancho.
- * Los desfases verticales rompen la fila y dan ritmo de masonry.
- */
-const PATTERN = [
-  { cell: "md:col-span-7", ratio: "4 / 3", sizes: "(min-width: 768px) 58vw, 100vw" },
-  { cell: "md:col-span-5 md:mt-28", ratio: "4 / 5", sizes: "(min-width: 768px) 42vw, 100vw" },
-  { cell: "md:col-span-5", ratio: "4 / 5", sizes: "(min-width: 768px) 42vw, 100vw" },
-  { cell: "md:col-span-7 md:mt-28", ratio: "4 / 3", sizes: "(min-width: 768px) 58vw, 100vw" },
-];
 
 type WorkGridProps = {
   projects: Project[];
   locale: Locale;
   dict: Dictionary;
-  /** h2 si la rejilla cuelga del H1 de la página, h3 si va dentro de una sección. */
   headingLevel?: "h2" | "h3";
 };
 
@@ -28,36 +16,59 @@ export default function WorkGrid({ projects, locale, dict, headingLevel = "h3" }
   const Heading = headingLevel;
 
   return (
-    <ul className="grid grid-cols-1 gap-x-6 gap-y-14 md:grid-cols-12 md:gap-y-20">
+    /* Franjas con ancho de pantalla real (Full-bleed viewport) */
+    <div className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] flex flex-col overflow-hidden">
       {projects.map((project, i) => {
-        const layout = PATTERN[i % PATTERN.length];
         const services = project.services
-          .map((slug) => dict.services.items[slug].name)
-          .join(", ");
+          .map((slug) => dict.services.items[slug]?.name || slug)
+          .join(" · ");
+
+        const projectHref = localizePath(locale, `proyectos/${project.slug}`);
 
         return (
-          <li key={project.slug} className={layout.cell}>
-            <Link href={localizePath(locale, `proyectos/${project.slug}`)} className="group block">
-              <ProjectImage
+          <article
+            key={project.slug}
+            className="group relative h-[60vh] min-h-[450px] w-full overflow-hidden border-b border-paper/10"
+          >
+            {/* 1. Imagen de Fondo a Ancho Total */}
+            {project.cover ? (
+              <Image
                 src={project.cover}
                 alt={project.title}
-                ratio={layout.ratio}
-                sizes={layout.sizes}
-                index={i}
+                fill
+                priority={i === 0}
+                sizes="100vw"
+                className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
               />
-              <div className="mt-4 flex items-baseline justify-between gap-4">
-                <Heading className="font-display text-xl font-semibold tracking-tight text-ink underline-offset-4 group-hover:underline md:text-2xl">
-                  {project.title}
-                </Heading>
-                {project.year ? (
-                  <span className="font-sans text-sm tabular-nums text-slate-soft">{project.year}</span>
-                ) : null}
-              </div>
-              <p className="mt-1 font-sans text-sm text-slate-soft">{services}</p>
-            </Link>
-          </li>
+            ) : (
+              <div className="size-full bg-slate-900" />
+            )}
+
+            {/* 2. Capa Oscura (Overlay) */}
+            <div className="absolute inset-0 z-10 bg-black/40 transition-colors duration-500 group-hover:bg-black/55" />
+
+            {/* 3. Contenido Centrado */}
+            <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-6">
+              {services && (
+                <span className="mb-3 font-sans text-xs uppercase tracking-widest text-paper/80">
+                  {services}
+                </span>
+              )}
+
+              <Heading className="font-display text-3xl font-medium tracking-tight text-paper md:text-5xl mb-6">
+                {project.title}
+              </Heading>
+
+              <Link
+                href={projectHref}
+                className="rounded-full border border-paper/30 bg-paper/10 backdrop-blur-md px-7 py-2.5 font-sans text-xs font-medium text-paper transition-all hover:bg-paper hover:text-ink"
+              >
+                {dict.common?.seeWork || "Ver proyecto"}
+              </Link>
+            </div>
+          </article>
         );
       })}
-    </ul>
+    </div>
   );
 }

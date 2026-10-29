@@ -5,27 +5,23 @@ import Image from "next/image";
 import { gsap, useGSAP } from "@/src/lib/gsap";
 import type { Project } from "@/src/data/projects";
 
-
 type Slot = {
   ratio: string;
   lg: [number, number];
   md: [number, number];
 };
 
-
+/* Definimos exactamente 9 casillas con un patrón de escalera/asimetría fluido */
 const SLOTS: Slot[] = [
-  { ratio: "4 / 5", lg: [1, 1], md: [1, 1] },
-  { ratio: "1 / 1", lg: [3, 1], md: [2, 2] },
-  { ratio: "3 / 4", lg: [2, 2], md: [1, 3] },
-  { ratio: "4 / 3", lg: [1, 3], md: [2, 4] },
-  { ratio: "4 / 5", lg: [2, 4], md: [1, 5] },
-  { ratio: "3 / 4", lg: [3, 4], md: [2, 6] },
-  { ratio: "1 / 1", lg: [1, 5], md: [1, 7] },
-  { ratio: "4 / 5", lg: [3, 5], md: [2, 8] },
-  { ratio: "4 / 3", lg: [2, 6], md: [1, 9] },
-  { ratio: "3 / 4", lg: [1, 7], md: [2, 10] },
-  { ratio: "4 / 5", lg: [3, 7], md: [1, 11] },
-  { ratio: "1 / 1", lg: [2, 8], md: [2, 12] },
+  { ratio: "4 / 5", lg: [1, 1], md: [1, 1] }, // Fila 1 (Izquierda)
+  { ratio: "1 / 1", lg: [3, 1], md: [2, 2] }, // Fila 1 (Derecha)
+  { ratio: "3 / 4", lg: [2, 2], md: [1, 3] }, // Fila 2 (Centro / Escalera)
+  { ratio: "4 / 3", lg: [1, 3], md: [2, 4] }, // Fila 3
+  { ratio: "4 / 5", lg: [2, 4], md: [1, 5] }, // Fila 3
+  { ratio: "3 / 4", lg: [3, 4], md: [2, 6] }, // Fila 4
+  { ratio: "1 / 1", lg: [1, 5], md: [1, 7] }, // Fila 5
+  { ratio: "4 / 5", lg: [3, 5], md: [2, 8] }, // Fila 5
+  { ratio: "4 / 3", lg: [2, 6], md: [1, 9] }, // Fila 6 (Casilla 9 añadida)
 ];
 
 /** Deriva de cada columna durante el recorrido, en px. Ritmos distintos = profundidad. */
@@ -81,6 +77,7 @@ export default function ProjectMosaic({ projects }: ProjectMosaicProps) {
   return (
     <div ref={root} className="container-site mosaic relative z-10 pt-[28vh] pb-32 md:pb-40">
       {SLOTS.map((slot, i) => {
+        // Tomamos los proyectos en orden estricto del 0 al 8 (las 9 casillas)
         const project = projects[i % projects.length];
         const hasImage = project.cover.length > 0;
 
@@ -104,18 +101,38 @@ export default function ProjectMosaic({ projects }: ProjectMosaicProps) {
             <figure
               data-figure
               aria-hidden
-              className="overflow-hidden rounded-xl"
+              className="relative overflow-hidden rounded-xl bg-mist"
               style={{ aspectRatio: slot.ratio }}
             >
               {hasImage ? (
-                <Image
-                  src={project.cover}
-                  alt=""
-                  width={900}
-                  height={1100}
-                  sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 88vw"
-                  className="size-full object-cover"
-                />
+                <>
+                  {/* 1. IMAGEN ESTÁTICA DE PRE-CARGA (Poster opcional) */}
+                  {project.poster && (
+                    <Image
+                      src={project.poster}
+                      alt=""
+                      width={900}
+                      height={1100}
+                      sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 88vw"
+                      className="absolute inset-0 size-full object-cover"
+                    />
+                  )}
+
+                  {/* 2. LA PORTADA O GIF PRINCIPAL */}
+                  <Image
+                    src={project.cover}
+                    alt=""
+                    width={900}
+                    height={1100}
+                    sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 88vw"
+                    className={`relative z-10 size-full object-cover ${project.poster ? "opacity-0 transition-opacity duration-700" : ""}`}
+                    onLoad={(e) => {
+                      if (project.poster) {
+                        (e.target as HTMLElement).style.opacity = "1";
+                      }
+                    }}
+                  />
+                </>
               ) : (
                 <div className={`size-full ${PLACEHOLDERS[i % PLACEHOLDERS.length]}`} />
               )}
