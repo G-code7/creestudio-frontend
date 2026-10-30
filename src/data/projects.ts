@@ -1,22 +1,14 @@
 import type { Locale, ServiceSlug } from "@/src/content/config";
 
 export type Project = {
-  /** Mismo slug que en creestudio.es para conservar el posicionamiento. */
   slug: string;
   title: string;
   year?: number;
   location?: string;
   services: ServiceSlug[];
-  /** Resumen por idioma. null = sin resumen todavía. */
   summary: Record<Locale, string> | null;
-  /** 
-   * URL de la portada o GIF. 
-   * Si type es "carousel", puedes poner varias URLs separadas por coma (ej: "url1.jpg, url2.jpg, url3.jpg").
-   */
   cover: string;
-  /** URL de la imagen estática de pre-carga (poster) mientras carga el contenido principal. */
   poster?: string;
-  /** Tipo de visualización: "standard" (por defecto, una sola imagen/gif) o "carousel" (múltiples imágenes). */
   type?: "standard" | "carousel";
   featured?: boolean;
 };
@@ -35,7 +27,7 @@ export const projects: Project[] = [
     },
     cover: "https://creestudio.es/wp-content/uploads/2025/12/GIF4-1.gif",
     poster: "https://creestudio.es/wp-content/uploads/2026/04/Mesa-de-trabajo-1-copia-7@2x-80.jpg",
-    type: "standard", // Por defecto
+    type: "standard",
     featured: true,
   },
   {
@@ -127,27 +119,9 @@ export const projects: Project[] = [
     cover: "https://creestudio.es/wp-content/uploads/2026/09/02.png",
     type: "standard",
   },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ];
 
-
-
-
 export const featuredProjects = projects.filter((p) => p.featured);
-
 export function getProject(slug: string): Project | undefined {
   return projects.find((p) => p.slug === slug);
 }

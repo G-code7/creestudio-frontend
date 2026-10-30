@@ -11,20 +11,18 @@ type Slot = {
   md: [number, number];
 };
 
-/* Definimos exactamente 9 casillas con un patrón de escalera/asimetría fluido */
 const SLOTS: Slot[] = [
-  { ratio: "4 / 5", lg: [1, 1], md: [1, 1] }, // Fila 1 (Izquierda)
-  { ratio: "1 / 1", lg: [3, 1], md: [2, 2] }, // Fila 1 (Derecha)
-  { ratio: "3 / 4", lg: [2, 2], md: [1, 3] }, // Fila 2 (Centro / Escalera)
-  { ratio: "4 / 3", lg: [1, 3], md: [2, 4] }, // Fila 3
-  { ratio: "4 / 5", lg: [2, 4], md: [1, 5] }, // Fila 3
-  { ratio: "3 / 4", lg: [3, 4], md: [2, 6] }, // Fila 4
-  { ratio: "1 / 1", lg: [1, 5], md: [1, 7] }, // Fila 5
-  { ratio: "4 / 5", lg: [3, 5], md: [2, 8] }, // Fila 5
-  { ratio: "4 / 3", lg: [2, 6], md: [1, 9] }, // Fila 6 (Casilla 9 añadida)
+  { ratio: "4 / 5", lg: [1, 1], md: [1, 1] },
+  { ratio: "1 / 1", lg: [3, 1], md: [2, 2] },
+  { ratio: "3 / 4", lg: [2, 2], md: [1, 3] },
+  { ratio: "4 / 3", lg: [1, 3], md: [2, 4] },
+  { ratio: "4 / 5", lg: [2, 4], md: [1, 5] },
+  { ratio: "3 / 4", lg: [3, 4], md: [2, 6] },
+  { ratio: "1 / 1", lg: [1, 5], md: [1, 7] },
+  { ratio: "4 / 5", lg: [3, 5], md: [2, 8] },
+  { ratio: "4 / 3", lg: [2, 6], md: [1, 9] },
 ];
 
-/** Deriva de cada columna durante el recorrido, en px. Ritmos distintos = profundidad. */
 const COLUMN_DRIFT = [-72, 44, -52];
 
 const PLACEHOLDERS = ["bg-slate", "bg-brand-dark", "bg-slate-soft"];
@@ -47,7 +45,6 @@ export default function ProjectMosaic({ projects }: ProjectMosaicProps) {
         slots.forEach((slot) => {
           const figure = slot.querySelector<HTMLElement>("[data-figure]");
 
-          // Parallax: la ranura deriva según la columna que ocupe en ese momento.
           gsap.to(slot, {
             y: () => COLUMN_DRIFT[Number(slot.dataset.column ?? 1) - 1] ?? 0,
             ease: "none",
@@ -77,7 +74,6 @@ export default function ProjectMosaic({ projects }: ProjectMosaicProps) {
   return (
     <div ref={root} className="container-site mosaic relative z-10 pt-[28vh] pb-32 md:pb-40">
       {SLOTS.map((slot, i) => {
-        // Tomamos los proyectos en orden estricto del 0 al 8 (las 9 casillas)
         const project = projects[i % projects.length];
         const hasImage = project.cover.length > 0;
 
@@ -106,7 +102,6 @@ export default function ProjectMosaic({ projects }: ProjectMosaicProps) {
             >
               {hasImage ? (
                 <>
-                  {/* 1. IMAGEN ESTÁTICA DE PRE-CARGA (Poster opcional) */}
                   {project.poster && (
                     <Image
                       src={project.poster}
@@ -118,7 +113,6 @@ export default function ProjectMosaic({ projects }: ProjectMosaicProps) {
                     />
                   )}
 
-                  {/* 2. LA PORTADA O GIF PRINCIPAL */}
                   <Image
                     src={project.cover}
                     alt=""

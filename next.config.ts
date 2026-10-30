@@ -4,14 +4,12 @@ const nextConfig: NextConfig = {
   // Las URLs de creestudio.es terminan en "/". Las mantenemos para no perder posicionamiento.
   trailingSlash: true,
 
-  images: {
-    remotePatterns: [
-      // 👇 ¡Aquí está el permiso agregado para WordPress!
-      { protocol: "https", hostname: "creestudio.es", pathname: "/wp-content/uploads/**" },
-      // Cuando subas las imágenes al backend headless, puedes dejar también esta por si acaso:
-      { protocol: "https", hostname: "cms.creestudio.es", pathname: "/wp-content/uploads/**" },
-    ],
-  },
+images: {
+  remotePatterns: [
+    { protocol: "https", hostname: "**.creestudio.es", pathname: "/wp-content/uploads/**" },
+    { protocol: "https", hostname: "creestudio.es", pathname: "/wp-content/uploads/**" },
+  ],
+},
 
   // 301 de las URLs del WordPress actual hacia la nueva arquitectura.
   async redirects() {

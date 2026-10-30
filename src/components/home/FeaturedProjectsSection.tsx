@@ -15,14 +15,12 @@ export default function FeaturedProjectsSection({
 }: FeaturedProjectsSectionProps) {
   return (
     <section className="w-full bg-paper">
-      {/* Título de la sección general opcional arriba */}
       <div className="container-site py-12">
         <h2 className="font-display text-2xl font-medium tracking-tight text-ink md:text-3xl">
           {title}
         </h2>
       </div>
 
-      {/* Contenedor de las franjas horizontales a ancho 100% */}
       <div className="flex flex-col">
         {projects.slice(0, 5).map((project) => {
           const hasImage = project.cover.length > 0;
@@ -32,7 +30,6 @@ export default function FeaturedProjectsSection({
               key={project.slug} 
               className="group relative h-[60vh] min-h-[450px] w-full overflow-hidden"
             >
-              {/* Imagen de fondo a ancho completo (100%) */}
               {hasImage ? (
                 <>
                   {project.poster && (
@@ -63,10 +60,7 @@ export default function FeaturedProjectsSection({
                 <div className="size-full bg-slate" />
               )}
 
-              {/* Capa oscura (Overlay) para que el texto resalte */}
               <div className="absolute inset-0 z-20 bg-black/40 transition-colors duration-300 group-hover:bg-black/50" />
-
-              {/* Contenido centrado dentro de la franja (Texto y Botón) */}
               <div className="absolute inset-0 z-30 flex flex-col items-center justify-center text-center px-4">
                 <span className="mb-2 font-sans text-xs uppercase tracking-widest text-paper/80">
                   {project.services.join(" · ")}
