@@ -6,8 +6,10 @@ const nextConfig: NextConfig = {
 
   images: {
     remotePatterns: [
-      // Cuando subas las imágenes al backend headless, descomenta y ajusta el host:
-      // { protocol: "https", hostname: "cms.creestudio.es", pathname: "/wp-content/uploads/**" },
+      // 👇 ¡Aquí está el permiso agregado para WordPress!
+      { protocol: "https", hostname: "creestudio.es", pathname: "/wp-content/uploads/**" },
+      // Cuando subas las imágenes al backend headless, puedes dejar también esta por si acaso:
+      { protocol: "https", hostname: "cms.creestudio.es", pathname: "/wp-content/uploads/**" },
     ],
   },
 
