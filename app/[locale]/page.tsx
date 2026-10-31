@@ -8,9 +8,8 @@ import Stakes from "@/src/components/home/Stakes";
 import Process from "@/src/components/home/Process";
 import AfterLaunch from "@/src/components/home/AfterLaunch";
 import ServicesIndex from "@/src/components/services/ServicesIndex";
-import WorkGrid from "@/src/components/work/WorkGrid";
+import FeaturedProjectsSection from "@/src/components/home/FeaturedProjectsSection";
 import CtaBand from "@/src/components/ui/CtaBand";
-import Link from "next/link";
 
 type PageProps = { params: Promise<{ locale: string }> };
 
@@ -50,20 +49,7 @@ export default async function HomePage({ params }: PageProps) {
         <ServicesIndex locale={locale} dict={dict} />
       </section>
 
-      <section className="container-site py-24 md:py-32">
-        <div className="mb-12 flex flex-wrap items-end justify-between gap-6 md:mb-16">
-          <h2 className="font-display text-3xl font-bold tracking-tight text-ink md:text-5xl">
-            {dict.home.work.title}
-          </h2>
-          <Link
-            href={localizePath(locale, "proyectos")}
-            className="font-sans text-base font-medium text-brand underline decoration-brand/40 underline-offset-[6px] transition-colors hover:decoration-brand"
-          >
-            {dict.home.work.all}
-          </Link>
-        </div>
-        <WorkGrid projects={featuredProjects.slice(0, 4)} locale={locale} dict={dict} />
-      </section>
+      <FeaturedProjectsSection projects={featuredProjects} locale={locale} dict={dict} />
 
       <Process
         title={dict.home.process.title}

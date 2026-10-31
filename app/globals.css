@@ -8,6 +8,7 @@
   --font-display: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-rubik), ui-sans-serif, system-ui, sans-serif;
 
+  --color-cree: #917fc0;
   --color-ink: #111111;
   --color-slate: #1e293b;
   --color-slate-soft: #334155;
@@ -88,31 +89,22 @@
 @layer components {
   .mosaic {
     display: grid;
-    grid-template-columns: 1fr;
-    column-gap: 32px;
-    row-gap: clamp(120px, 10vw, 200px);
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 16px;
+    row-gap: clamp(40px, 5vw, 88px);
   }
 
   .mosaic-slot {
     grid-column: var(--c);
     grid-row: var(--r);
+    align-self: start;
     will-change: transform;
-  }
-
-  @media (min-width: 640px) {
-    .mosaic {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    .mosaic-slot {
-      grid-column: var(--c-md);
-      grid-row: var(--r-md);
-    }
   }
 
   @media (min-width: 1024px) {
     .mosaic {
       grid-template-columns: repeat(3, 1fr);
-      column-gap: 40px;
+      column-gap: 30px;
     }
     .mosaic-slot {
       grid-column: var(--c-lg);
