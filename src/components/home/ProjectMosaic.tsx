@@ -9,21 +9,19 @@ type Slot = {
   ratio: string;
   sm: [number, number];
   lg: [number, number];
+  nudge?: string;
 };
 
 const SLOTS: Slot[] = [
   { ratio: "4 / 5", sm: [1, 1], lg: [1, 1] },
-  { ratio: "1 / 1", sm: [2, 1], lg: [2, 1] },
-  { ratio: "3 / 4", sm: [1, 2], lg: [3, 2] },
-  { ratio: "4 / 3", sm: [2, 2], lg: [1, 2] },
-  { ratio: "4 / 5", sm: [1, 3], lg: [2, 2] },
-  { ratio: "1 / 1", sm: [2, 3], lg: [3, 3] },
-  { ratio: "3 / 4", sm: [1, 4], lg: [1, 3] },
-  { ratio: "4 / 5", sm: [2, 4], lg: [2, 3] },
-  { ratio: "4 / 3", sm: [1, 5], lg: [3, 4] },
-  { ratio: "1 / 1", sm: [2, 5], lg: [1, 4] },
-  { ratio: "3 / 4", sm: [1, 6], lg: [2, 4] },
-  { ratio: "4 / 5", sm: [2, 6], lg: [3, 5] },
+  { ratio: "1 / 1", sm: [2, 2], lg: [3, 1] },
+  { ratio: "3 / 4", sm: [1, 3], lg: [2, 2] },
+  { ratio: "4 / 3", sm: [2, 4], lg: [1, 3] },
+  { ratio: "4 / 5", sm: [1, 5], lg: [2, 4] },
+  { ratio: "3 / 4", sm: [2, 6], lg: [3, 4], nudge: "lg:-mt-32" },
+  { ratio: "1 / 1", sm: [1, 7], lg: [1, 5] },
+  { ratio: "4 / 5", sm: [2, 8], lg: [3, 5] },
+  { ratio: "4 / 3", sm: [1, 9], lg: [2, 6] },
 ];
 
 const COLUMN_DRIFT = [-72, 44, -52];
@@ -71,21 +69,23 @@ export default function ProjectMosaic({ projects }: ProjectMosaicProps) {
 
             if (!figure) return;
 
-            gsap.from(figure, {
-              yPercent: 10,
-              autoAlpha: 0,
-              duration: 0.7,
-              ease: "power2.out",
-              scrollTrigger: { trigger: slot, start: "top 90%", once: true },
-            });
-
-            gsap.to(figure, {
-              yPercent: -12,
-              scale: 0.97,
-              autoAlpha: 0,
-              ease: "none",
-              scrollTrigger: { trigger: slot, start: "top 20%", end: "top -5%", scrub: true },
-            });
+            gsap
+              .timeline({
+                scrollTrigger: {
+                  trigger: slot,
+                  start: "top bottom",
+                  end: "bottom top",
+                  scrub: 0.8,
+                  invalidateOnRefresh: true,
+                },
+              })
+              .fromTo(
+                figure,
+                { autoAlpha: 0, yPercent: 14, scale: 0.94 },
+                { autoAlpha: 1, yPercent: 0, scale: 1, ease: "power2.out", duration: 0.35 }
+              )
+              .to(figure, { duration: 0.3 })
+              .to(figure, { autoAlpha: 0, yPercent: -10, scale: 0.96, ease: "power2.in", duration: 0.35 });
           });
         }
       );
@@ -105,7 +105,7 @@ export default function ProjectMosaic({ projects }: ProjectMosaicProps) {
             data-slot
             data-col-sm={slot.sm[0]}
             data-col-lg={slot.lg[0]}
-            className="mosaic-slot"
+            className={`mosaic-slot ${slot.nudge ?? ""}`}
             style={
               {
                 "--c": slot.sm[0],
