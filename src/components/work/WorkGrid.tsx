@@ -16,8 +16,8 @@ export default function WorkGrid({ projects, locale, dict, headingLevel = "h3" }
   const Heading = headingLevel;
 
   return (
-    /* Franjas con ancho de pantalla real (Full-bleed viewport) */
-    <div className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] flex flex-col overflow-hidden">
+    /* Franjas a todo el ancho: el padre no debe llevar container-site. */
+    <div className="flex flex-col">
       {projects.map((project, i) => {
         const services = project.services
           .map((slug) => dict.services.items[slug]?.name || slug)

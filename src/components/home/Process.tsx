@@ -24,7 +24,7 @@ export default function Process({ title, intro, steps }: ProcessProps) {
         {steps.map((step, i) => (
           <li key={step.name} className="border-b border-line py-8 first:pt-0 md:py-10 md:first:pt-0">
             <div className="flex items-baseline gap-5">
-              <span aria-hidden className="font-sans text-sm tabular-nums text-brand">
+              <span aria-hidden className="font-sans text-sm tabular-nums text-brand-ink">
                 ({String(i).padStart(2, "0")})
               </span>
               <h3 className="font-display text-2xl font-semibold tracking-tight text-ink md:text-3xl">

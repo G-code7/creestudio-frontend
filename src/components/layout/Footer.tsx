@@ -6,7 +6,7 @@ import { site } from "@/src/lib/site";
 
 type FooterProps = { locale: Locale; dict: Dictionary };
 
-const linkClass = "font-sans text-sm text-slate transition-colors hover:text-brand";
+const linkClass = "font-sans text-sm text-slate transition-colors hover:text-brand-ink";
 const titleClass = "font-display text-sm font-semibold text-ink";
 
 export default function Footer({ locale, dict }: FooterProps) {
@@ -78,7 +78,7 @@ export default function Footer({ locale, dict }: FooterProps) {
         <p>
           © {year} {site.name}. {dict.footer.rights}
         </p>
-        <Link href={localizePath(locale, "privacidad")} className="transition-colors hover:text-brand">
+        <Link href={localizePath(locale, "privacidad")} className="transition-colors hover:text-brand-ink">
           {dict.footer.privacy}
         </Link>
       </div>

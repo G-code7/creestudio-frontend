@@ -33,7 +33,7 @@ export default function Header({ locale, dict }: HeaderProps) {
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className="font-sans text-sm text-slate transition-colors hover:text-brand"
+                  className="font-sans text-sm text-slate transition-colors hover:text-brand-ink"
                 >
                   {link.label}
                 </Link>

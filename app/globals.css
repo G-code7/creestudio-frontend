@@ -13,6 +13,8 @@
   --color-slate: #1e293b;
   --color-slate-soft: #334155;
   --color-brand: #9d8bcc;
+  /* El mismo lavanda, oscurecido para texto pequeño, foco y selección (6,3:1 sobre blanco). */
+  --color-brand-ink: #694eb1;
   --color-brand-dark: #9c79b5;
   --color-mist: #f0f5fa;
   --color-line: #d1d5db;
@@ -64,17 +66,17 @@
 
   /* Superficies del navegador con la marca */
   ::selection {
-    background: var(--color-brand);
+    background: var(--color-brand-ink);
     color: var(--color-paper);
   }
 
   input,
   textarea {
-    caret-color: var(--color-brand);
+    caret-color: var(--color-brand-ink);
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-brand);
+    outline: 2px solid var(--color-brand-ink);
     outline-offset: 3px;
   }
 }

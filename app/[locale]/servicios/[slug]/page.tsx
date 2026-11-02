@@ -101,8 +101,8 @@ export default async function ServicePage({ params }: PageProps) {
       </section>
 
       {related.length > 0 ? (
-        <section className="container-site py-24 md:py-32">
-          <h2 className="mb-12 font-display text-3xl font-bold tracking-tight text-ink md:mb-16 md:text-4xl">
+        <section className="py-24 md:py-32">
+          <h2 className="container-site mb-12 font-display text-3xl font-bold tracking-tight text-ink md:mb-16 md:text-4xl">
             {dict.services.relatedWork}
           </h2>
           <WorkGrid projects={related} locale={locale} dict={dict} />

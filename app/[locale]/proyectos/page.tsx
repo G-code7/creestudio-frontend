@@ -31,7 +31,7 @@ export default async function WorkPage({ params }: PageProps) {
   return (
     <>
       <PageHeader title={dict.work.title} intro={dict.work.intro} />
-      <section className="container-site pb-24 md:pb-36">
+      <section className="pb-24 md:pb-36">
         <WorkGrid projects={projects} locale={locale} dict={dict} headingLevel="h2" />
       </section>
       <CtaBand

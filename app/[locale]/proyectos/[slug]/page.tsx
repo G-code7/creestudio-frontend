@@ -44,6 +44,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     path: `proyectos/${project.slug}`,
     title: services ? `${project.title}: ${services}` : project.title,
     description: project.summary ?? dict.work.metaDescription,
+    image: project.cover?.src,
+    type: "article",
   });
 }
 

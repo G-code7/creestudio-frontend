@@ -13,7 +13,13 @@ export type Project = {
   featured?: boolean;
 };
 
-/* Temporal: estos datos se reemplazarán por fetchProjects() desde WordPress. */
+/*
+ * Solo para el mosaico del hero (ProjectMosaic). El resto del sitio lee los
+ * proyectos de WordPress (src/lib/projects-wp.ts). Las entradas repetidas son
+ * a propósito: rellenan las 9 piezas del mosaico con portadas distintas.
+ * Pendiente: GIF4-1.gif e isotipo1.gif siguen en creestudio.es (WordPress
+ * viejo); hay que subir una versión ligera a api.creestudio.es o a /public.
+ */
 export const projects: Project[] = [
   {
     slug: "ladiescup-2026",
@@ -26,7 +32,7 @@ export const projects: Project[] = [
       en: "Visual identity for a women’s golf tournament in Brooklyn, with a refined language that matches the game.",
     },
     cover: "https://creestudio.es/wp-content/uploads/2025/12/GIF4-1.gif",
-    poster: "https://creestudio.es/wp-content/uploads/2026/04/Mesa-de-trabajo-1-copia-7@2x-80.jpg",
+    poster: "https://api.creestudio.es/wp-content/uploads/2026/10/Mesa-de-trabajo-1-copia-7@2x-80.jpg",
     type: "standard",
     featured: true,
   },
@@ -40,7 +46,7 @@ export const projects: Project[] = [
       es: "Branding estratégico y packaging para una marca de salud digestiva canina.",
       en: "Strategic branding and packaging for a canine digestive health brand.",
     },
-    cover: "https://creestudio.es/wp-content/uploads/2026/09/BEHANCE-PROYECTO-PAN-Y-PIZZA-13.jpg",
+    cover: "https://api.creestudio.es/wp-content/uploads/2026/10/BEHANCE-PROYECTO-PAN-Y-PIZZA-13-1-1.jpg",
     type: "standard",
     featured: true,
   },
@@ -55,7 +61,7 @@ export const projects: Project[] = [
       en: "Strategic branding for a Peruvian-Mediterranean fusion restaurant concept.",
     },
     // Ejemplo de un proyecto con tipo "carousel" separando varias URLs con comas:
-    cover: "https://creestudio.es/wp-content/uploads/2025/12/Gemini_Generated_Image_89ndtj89ndtj89nd-scaled-1-1.jpg",
+    cover: "https://api.creestudio.es/wp-content/uploads/2026/10/Gemini_Generated_Image_89ndtj89ndtj89nd-scaled-1-1-1-1.jpg",
     type: "carousel",
     featured: true,
   },
@@ -68,7 +74,7 @@ export const projects: Project[] = [
       es: "Branding para una plataforma que digitaliza el turismo en Venezuela.",
       en: "Branding for a platform bringing Venezuelan tourism online.",
     },
-    cover: "https://creestudio.es/wp-content/uploads/2025/12/PORTAFOLO-BUENAVENTURA_Mesa-de-trabajo-1-copia-17-1.jpg",
+    cover: "https://api.creestudio.es/wp-content/uploads/2026/10/Mesa-de-trabajo-1-copia-17@2x-80-1.jpg",
     type: "standard",
     featured: true,
   },
@@ -80,7 +86,7 @@ export const projects: Project[] = [
       es: "Identidad visual para la celebración de los 20 años de la compañía.",
       en: "Visual identity for the company’s 20th anniversary.",
     },
-    cover: "https://creestudio.es/wp-content/uploads/2025/09/BP2_Mesa-de-trabajo-1-copia-18.jpg",
+    cover: "https://api.creestudio.es/wp-content/uploads/2026/10/BP2_Mesa-de-trabajo-1-copia-18-1.jpg",
     type: "standard",
     featured: true,
   },
@@ -89,7 +95,7 @@ export const projects: Project[] = [
     title: "Delta Supply",
     services: ["identidad-visual"],
     summary: null,
-    cover: "https://creestudio.es/wp-content/uploads/2026/09/PORTAFOLIO-TUTAXI-2026-07.jpg",
+    cover: "https://api.creestudio.es/wp-content/uploads/2026/10/PORTAFOLIO-TUTAXI-2026-07-1-1.jpg",
     type: "standard",
   },
   {
@@ -106,7 +112,7 @@ export const projects: Project[] = [
     title: "Psicopetoykids",
     services: ["branding"],
     summary: null,
-    cover: "https://creestudio.es/wp-content/uploads/2025/12/ONCE-UNO.jpg",
+    cover: "https://api.creestudio.es/wp-content/uploads/2026/10/ONCE-UNO-1.jpg",
     type: "standard",
   },
 
@@ -116,12 +122,7 @@ export const projects: Project[] = [
     title: "Psicopetoykids",
     services: ["branding"],
     summary: null,
-    cover: "https://creestudio.es/wp-content/uploads/2026/09/02.png",
+    cover: "https://api.creestudio.es/wp-content/uploads/2026/10/02-1.jpg",
     type: "standard",
   },
 ];
-
-export const featuredProjects = projects.filter((p) => p.featured);
-export function getProject(slug: string): Project | undefined {
-  return projects.find((p) => p.slug === slug);
-}

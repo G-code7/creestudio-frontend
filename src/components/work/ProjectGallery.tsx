@@ -7,19 +7,30 @@ import type { GalleryImage } from "@/src/lib/gallery";
 
 
 const ratioOf = (im: GalleryImage) => (im.width > 0 && im.height > 0 ? im.width / im.height : 4 / 3);
-const isPortrait = (im: GalleryImage) => ratioOf(im) <= 0.9;
+/*
+ * Filas justificadas: cada fila suma proporciones (ancho/alto) hasta llegar a
+ * ROW_RATIO, y todas sus imágenes comparten alto. Una horizontal va sola; dos
+ * verticales, o una vertical y una horizontal, van juntas. Nunca queda una
+ * vertical sola con un hueco al lado: si sobra al final, se une a la fila anterior.
+ */
+const ROW_RATIO = 1.6;
 
 function toRows(images: GalleryImage[]): GalleryImage[][] {
   const rows: GalleryImage[][] = [];
-  for (let i = 0; i < images.length; i++) {
-    const im = images[i];
-    const next = images[i + 1];
-    if (isPortrait(im) && next && isPortrait(next)) {
-      rows.push([im, next]);
-      i++;
-    } else {
-      rows.push([im]);
+  let row: GalleryImage[] = [];
+  let sum = 0;
+  for (const im of images) {
+    row.push(im);
+    sum += ratioOf(im);
+    if (sum >= ROW_RATIO) {
+      rows.push(row);
+      row = [];
+      sum = 0;
     }
+  }
+  if (row.length > 0) {
+    if (rows.length > 0 && sum < ROW_RATIO / 2) rows[rows.length - 1].push(...row);
+    else rows.push(row);
   }
   return rows;
 }

@@ -32,7 +32,7 @@ export default function LocaleSwitcher({ locale, label }: LocaleSwitcherProps) {
             href={localizePath(l, rest)}
             hrefLang={l}
             lang={l}
-            className="rounded-full px-2.5 py-1 uppercase text-slate-soft transition-colors hover:text-brand"
+            className="rounded-full px-2.5 py-1 uppercase text-slate-soft transition-colors hover:text-brand-ink"
           >
             <span className="sr-only">{localeNames[l]}</span>
             <span aria-hidden>{l}</span>

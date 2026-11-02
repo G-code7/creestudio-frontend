@@ -16,7 +16,7 @@ export const buttonBase =
   "transition-colors duration-300 disabled:cursor-not-allowed disabled:opacity-50";
 
 export const buttonVariants: Record<Variant, string> = {
-  primary: "bg-ink text-paper hover:bg-brand",
+  primary: "bg-ink text-paper hover:bg-brand-ink",
   ghost: "border border-ink/25 text-ink hover:border-ink hover:bg-ink hover:text-paper",
 };
 

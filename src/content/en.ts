@@ -434,6 +434,12 @@ const en: Dictionary = {
         ],
       },
       {
+        title: "Legal basis",
+        body: [
+          "We process your data because you ask us for a proposal: a pre-contractual step taken at your request (Article 6(1)(b) GDPR). Without the required fields of the form we cannot reply to you.",
+        ],
+      },
+      {
         title: "How long we keep it",
         body: [
           "For as long as the sales conversation lasts and, if we work together, for the duration of the professional relationship and any legally required periods.",
@@ -446,9 +452,16 @@ const en: Dictionary = {
         ],
       },
       {
+        title: "International transfers",
+        body: [
+          "Some of these providers are based in the United States: Vercel, which hosts this site, and Resend, which delivers your request to us by email. We only work with providers that offer the safeguards required by the GDPR for these transfers, such as the EU-U.S. Data Privacy Framework or the European Commission’s standard contractual clauses.",
+        ],
+      },
+      {
         title: "Your rights",
         body: [
           "You can request access to, correction or deletion of your data, object to its use or request its portability. Write to us through the contact form and we will reply.",
+          "If you believe we have not handled your data properly, you can lodge a complaint with the Spanish Data Protection Agency (aepd.es).",
         ],
       },
     ],

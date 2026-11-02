@@ -17,7 +17,7 @@ export default function AfterLaunch({ title, text, link }: AfterLaunchProps) {
         <p className="mt-6 max-w-2xl font-sans text-lg leading-relaxed text-slate">{text}</p>
         <Link
           href={link.href}
-          className="mt-8 inline-block font-sans text-base font-medium text-brand underline decoration-brand/40 underline-offset-[6px] transition-colors hover:decoration-brand"
+          className="mt-8 inline-block font-sans text-base font-medium text-brand-ink underline decoration-brand-ink/40 underline-offset-[6px] transition-colors hover:decoration-brand-ink"
         >
           {link.label}
         </Link>

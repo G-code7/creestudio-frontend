@@ -342,7 +342,7 @@ export default function QualifyForm({ copy, locale, privacyHref, preselect }: Qu
                   <Link
                     href={privacyHref}
                     target="_blank"
-                    className="text-ink underline underline-offset-4 hover:text-brand"
+                    className="text-ink underline underline-offset-4 hover:text-brand-ink"
                   >
                     {copy.contact.consentLink}
                   </Link>
@@ -467,7 +467,7 @@ function ChoiceGroup({ id, type, legend, options, error, columns = 2, isChecked,
         {options.map((option, i) => (
           <label
             key={option.value}
-            className="flex cursor-pointer items-center gap-3 rounded-xl border border-line px-4 py-3.5 font-sans text-base text-slate transition-colors hover:border-slate-soft has-checked:border-ink has-checked:bg-mist has-checked:text-ink has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-brand"
+            className="flex cursor-pointer items-center gap-3 rounded-xl border border-line px-4 py-3.5 font-sans text-base text-slate transition-colors hover:border-slate-soft has-checked:border-ink has-checked:bg-mist has-checked:text-ink has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-brand-ink"
           >
             <input
               id={i === 0 ? id : undefined}

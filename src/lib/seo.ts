@@ -11,6 +11,9 @@ type PageMetaArgs = {
   description: string;
   /** true en la home: el título no pasa por la plantilla "%s | Cree Studio". */
   absoluteTitle?: boolean;
+  /** Imagen al compartir el enlace. Por defecto, la de la marca en el idioma de la página. */
+  image?: string;
+  type?: "website" | "article";
 };
 
 export function pageMetadata({
@@ -19,6 +22,8 @@ export function pageMetadata({
   title,
   description,
   absoluteTitle = false,
+  image,
+  type = "website",
 }: PageMetaArgs): Metadata {
   const url = localizePath(locale, path);
   return {
@@ -33,12 +38,14 @@ export function pageMetadata({
       },
     },
     openGraph: {
-      type: "website",
+      type,
       title,
       description,
       url,
       siteName: site.name,
       locale: locale === "es" ? "es_ES" : "en_US",
+      images: [image ?? `/og-${locale}.jpg`],
     },
+    twitter: { card: "summary_large_image" },
   };
 }

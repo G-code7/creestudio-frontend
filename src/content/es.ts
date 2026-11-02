@@ -444,6 +444,12 @@ const es: Dictionary = {
         ],
       },
       {
+        title: "Base legal",
+        body: [
+          "Tratamos tus datos porque nos pides una propuesta: es una medida precontractual solicitada por ti (artículo 6.1.b del RGPD). Si no nos das los datos obligatorios del formulario, no podemos responderte.",
+        ],
+      },
+      {
         title: "Cuánto tiempo los guardamos",
         body: [
           "Mientras dure la conversación comercial y, si trabajamos juntos, durante la relación profesional y los plazos legales que correspondan.",
@@ -456,9 +462,16 @@ const es: Dictionary = {
         ],
       },
       {
+        title: "Transferencias internacionales",
+        body: [
+          "Algunos de esos proveedores están en Estados Unidos: Vercel, que aloja este sitio, y Resend, que nos entrega tu solicitud por correo. Solo trabajamos con proveedores que ofrecen las garantías del RGPD para estas transferencias, como el Marco de Privacidad de Datos UE-EE. UU. o las cláusulas contractuales tipo de la Comisión Europea.",
+        ],
+      },
+      {
         title: "Tus derechos",
         body: [
           "Puedes pedir acceso, rectificación o eliminación de tus datos, oponerte a su uso o solicitar su portabilidad. Escríbenos desde el formulario de contacto y te responderemos.",
+          "Si crees que no hemos tratado bien tus datos, puedes presentar una reclamación ante la Agencia Española de Protección de Datos (aepd.es).",
         ],
       },
     ],

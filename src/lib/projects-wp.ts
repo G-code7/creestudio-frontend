@@ -1,5 +1,5 @@
 import { wpClient } from "./wordpress";
-import { galleryIds, type GalleryImage } from "./gallery";
+import { galleryRefs, isSameFile, type GalleryImage } from "./gallery";
 import type { Locale, ServiceSlug } from "@/src/content/config";
 
 /** ES por defecto; EN con fallback al ES si la traducción viene vacía. */
@@ -8,7 +8,7 @@ function byLocale(es: string | null | undefined, en: string | null | undefined, 
   return es || "";
 }
 
-/*  Lista: índice, destacados del home, servicios, sitemap */
+/* ── Lista: índice, destacados del home, servicios, sitemap ─────────── */
 
 export type ProjectCard = {
   slug: string;
@@ -114,29 +114,60 @@ const PROJECT_QUERY = /* GraphQL */ `
   }
 `;
 
-const MEDIA_QUERY = /* GraphQL */ `
+const MEDIA_FIELDS = "databaseId sourceUrl large: sourceUrl(size: LARGE) altText mediaDetails { width height }";
+
+const MEDIA_BY_ID_QUERY = /* GraphQL */ `
   query GalleryMedia($ids: [ID]) {
-    mediaItems(where: { in: $ids }, first: 100) {
-      nodes { databaseId sourceUrl large: sourceUrl(size: LARGE) altText mediaDetails { width height } }
-    }
+    mediaItems(where: { in: $ids }, first: 100) { nodes { ${MEDIA_FIELDS} } }
   }
 `;
 
+/** Una búsqueda por nombre por cada imagen cuyo adjunto ya no existe, en una sola petición. */
+function mediaByNameQuery(count: number): string {
+  const vars = Array.from({ length: count }, (_, i) => `$s${i}: String`).join(", ");
+  const fields = Array.from(
+    { length: count },
+    (_, i) => `m${i}: mediaItems(first: 10, where: { search: $s${i} }) { nodes { ${MEDIA_FIELDS} } }`
+  ).join("\n");
+  return `query GalleryMediaByName(${vars}) {\n${fields}\n}`;
+}
+
 /**
- * Galería a partir de los adjuntos que cita el contenido, consultados a la
- * biblioteca de medios. Un adjunto borrado no vuelve en la consulta y
- * simplemente no se pinta, en lugar de quedar como imagen rota.
+ * Galería del proyecto, en el orden del contenido:
+ *   1. por ID de adjunto;
+ *   2. si ese adjunto se borró, por nombre de archivo en la biblioteca
+ *      (la misma imagen resubida; si hay varias, la más reciente);
+ *   3. si no aparece de ninguna forma, se omite en vez de quedar rota.
  */
 async function fetchGallery(content: string | null): Promise<GalleryImage[]> {
-  const ids = galleryIds(content);
-  if (ids.length === 0) return [];
+  const refs = galleryRefs(content);
+  if (refs.length === 0) return [];
 
-  const data = await wpClient.request<{ mediaItems: { nodes: WpMedia[] } }>(MEDIA_QUERY, { ids });
-  const byId = new Map(data.mediaItems.nodes.map((m) => [m.databaseId, m]));
+  const ids = refs.flatMap((r) => (r.id ? [r.id] : []));
+  const byId = new Map<number, WpMedia>();
+  if (ids.length > 0) {
+    const data = await wpClient.request<{ mediaItems: { nodes: WpMedia[] } }>(MEDIA_BY_ID_QUERY, { ids });
+    for (const m of data.mediaItems.nodes) byId.set(m.databaseId, m);
+  }
 
-  return ids.flatMap((id) => {
-    const m = byId.get(id);
-    if (!m) return [];
+  const missing = refs.filter((r) => !(r.id && byId.has(r.id)));
+  const byName = new Map<string, WpMedia>();
+  if (missing.length > 0) {
+    const vars = Object.fromEntries(missing.map((r, i) => [`s${i}`, r.search]));
+    const data = await wpClient.request<Record<string, { nodes: WpMedia[] }>>(mediaByNameQuery(missing.length), vars);
+    missing.forEach((r, i) => {
+      const match = (data[`m${i}`]?.nodes ?? [])
+        .filter((m) => isSameFile(m.sourceUrl, r.name))
+        .sort((a, b) => b.databaseId - a.databaseId)[0];
+      if (match) byName.set(r.name, match);
+    });
+  }
+
+  const used = new Set<number>();
+  return refs.flatMap((r) => {
+    const m = (r.id ? byId.get(r.id) : undefined) ?? byName.get(r.name);
+    if (!m || used.has(m.databaseId)) return [];
+    used.add(m.databaseId);
     return [{
       src: m.large || m.sourceUrl,
       width: m.mediaDetails?.width ?? 0,
@@ -153,10 +184,20 @@ export async function fetchProjectBySlug(slug: string, locale: Locale): Promise<
 
   const acf = p.datosDelProyecto;
   const node = p.featuredImage?.node;
+  const title = byLocale(p.title, acf?.tituloEn, locale) || p.title;
+
+  // Alt de la biblioteca de medios; si está vacío, "Título, imagen 2 de 5".
+  const gallery = await fetchGallery(p.content);
+  const word = locale === "en" ? "image" : "imagen";
+  const of = locale === "en" ? "of" : "de";
+  const images = gallery.map((im, i) => ({
+    ...im,
+    alt: im.alt || `${title}, ${word} ${i + 1} ${of} ${gallery.length}`,
+  }));
 
   return {
     slug: p.slug,
-    title: byLocale(p.title, acf?.tituloEn, locale) || p.title,
+    title,
     services: p.servicios.nodes.map((n) => n.slug as ServiceSlug),
     year: acf?.anio ?? undefined,
     cover: node
@@ -168,6 +209,6 @@ export async function fetchProjectBySlug(slug: string, locale: Locale): Promise<
         }
       : undefined,
     summary: byLocale(acf?.descripcionCorta, acf?.descripcionCortaEn, locale) || undefined,
-    images: await fetchGallery(p.content),
+    images,
   };
 }
