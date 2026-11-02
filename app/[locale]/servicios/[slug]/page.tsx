@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { isServiceSlug, locales, serviceSlugs } from "@/src/content/config";
 import { getDictionary } from "@/src/content";
-import { projects } from "@/src/data/projects";
+import { fetchProjects } from "@/src/lib/projects-wp";
 import { localizePath, resolveLocale } from "@/src/lib/i18n";
 import { pageMetadata } from "@/src/lib/seo";
 import Button from "@/src/components/ui/Button";
@@ -12,6 +12,8 @@ import WorkGrid from "@/src/components/work/WorkGrid";
 type PageProps = { params: Promise<{ locale: string; slug: string }> };
 
 export const dynamicParams = false;
+// "Proyectos con este servicio" viene de WordPress.
+export const revalidate = 3600;
 
 export function generateStaticParams() {
   return locales.flatMap((locale) => serviceSlugs.map((slug) => ({ locale, slug })));
@@ -39,7 +41,7 @@ export default async function ServicePage({ params }: PageProps) {
   const { locale, slug, dict } = await resolve(params);
   const service = dict.services.items[slug];
   const contactHref = `${localizePath(locale, "contacto")}?servicio=${slug}`;
-  const related = projects.filter((p) => p.services.includes(slug)).slice(0, 4);
+  const related = (await fetchProjects(locale)).filter((p) => p.services.includes(slug)).slice(0, 4);
 
   return (
     <>

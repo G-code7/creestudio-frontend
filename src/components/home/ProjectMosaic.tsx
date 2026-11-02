@@ -24,6 +24,10 @@ const SLOTS: Slot[] = [
   { ratio: "4 / 3", sm: [1, 9], lg: [2, 6] },
 ];
 
+/* Portadas en cualquier formato: imagen (jpg, png, webp, gif) o vídeo (mp4, webm). */
+const isVideo = (src: string) => /\.(mp4|webm)(\?.*)?$/i.test(src);
+const isGif = (src: string) => /\.gif(\?.*)?$/i.test(src);
+
 const COLUMN_DRIFT = [-72, 44, -52];
 
 const PLACEHOLDERS = ["bg-slate", "bg-brand-dark", "bg-slate-soft"];
@@ -133,19 +137,34 @@ export default function ProjectMosaic({ projects }: ProjectMosaicProps) {
                       className="absolute inset-0 size-full object-cover"
                     />
                   )}
-                  <Image
-                    src={project.cover}
-                    alt=""
-                    width={900}
-                    height={1100}
-                    sizes="(min-width: 1024px) 30vw, 45vw"
-                    className={`relative z-10 size-full object-cover ${project.poster ? "opacity-0 transition-opacity duration-700" : ""}`}
-                    onLoad={(e) => {
-                      if (project.poster) {
-                        (e.target as HTMLElement).style.opacity = "1";
-                      }
-                    }}
-                  />
+                  {isVideo(project.cover) ? (
+                    <video
+                      src={project.cover}
+                      poster={project.poster}
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      preload="metadata"
+                      className="relative z-10 size-full object-cover"
+                    />
+                  ) : (
+                    <Image
+                      src={project.cover}
+                      alt=""
+                      width={900}
+                      height={1100}
+                      sizes="(min-width: 1024px) 30vw, 45vw"
+                      // El optimizador no reduce GIF animados: se sirve el original una sola vez.
+                      unoptimized={isGif(project.cover)}
+                      className={`relative z-10 size-full object-cover ${project.poster ? "opacity-0 transition-opacity duration-700" : ""}`}
+                      onLoad={(e) => {
+                        if (project.poster) {
+                          (e.target as HTMLElement).style.opacity = "1";
+                        }
+                      }}
+                    />
+                  )}
                 </>
               ) : (
                 <div className={`size-full ${PLACEHOLDERS[i % PLACEHOLDERS.length]}`} />

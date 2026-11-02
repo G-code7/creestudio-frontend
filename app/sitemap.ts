@@ -1,10 +1,14 @@
 import type { MetadataRoute } from "next";
 import { locales, serviceSlugs } from "@/src/content/config";
-import { projects } from "@/src/data/projects";
 import { localizePath } from "@/src/lib/i18n";
+import { fetchProjects } from "@/src/lib/projects-wp";
 import { site } from "@/src/lib/site";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+// Los proyectos vienen de WordPress: el sitemap se regenera cada hora.
+export const revalidate = 3600;
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const projects = await fetchProjects("es");
   const paths = [
     "",
     "servicios",

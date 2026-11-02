@@ -2,11 +2,11 @@ import Link from "next/link";
 import Image from "next/image";
 import type { Locale } from "@/src/content/config";
 import type { Dictionary } from "@/src/content/types";
-import type { Project } from "@/src/data/projects";
+import type { ProjectCard } from "@/src/lib/projects-wp";
 import { localizePath } from "@/src/lib/i18n";
 
 type WorkGridProps = {
-  projects: Project[];
+  projects: ProjectCard[];
   locale: Locale;
   dict: Dictionary;
   headingLevel?: "h2" | "h3";
@@ -38,6 +38,7 @@ export default function WorkGrid({ projects, locale, dict, headingLevel = "h3" }
                 fill
                 priority={i === 0}
                 sizes="100vw"
+                unoptimized={/\.gif$/i.test(project.cover)}
                 className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
               />
             ) : (

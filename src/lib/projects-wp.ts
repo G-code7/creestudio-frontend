@@ -1,15 +1,69 @@
 import { wpClient } from "./wordpress";
-import { parseGalleryImages, type GalleryImage } from "./gallery";
+import { galleryIds, type GalleryImage } from "./gallery";
 import type { Locale, ServiceSlug } from "@/src/content/config";
 
-/*
- * Capa de datos de proyectos desde WordPress headless (api.creestudio.es).
- * De momento alimenta solo la página de proyecto individual; el resto del
- * sitio sigue en src/data/projects.ts hasta que migremos lo demás.
- *
- * Bilingüe: el texto se resuelve por idioma (campo original = ES, variante
- * _en = EN con fallback al ES). Las imágenes se comparten entre idiomas.
- */
+/** ES por defecto; EN con fallback al ES si la traducción viene vacía. */
+function byLocale(es: string | null | undefined, en: string | null | undefined, locale: Locale): string {
+  if (locale === "en") return (en && en.trim()) || es || "";
+  return es || "";
+}
+
+/*  Lista: índice, destacados del home, servicios, sitemap */
+
+export type ProjectCard = {
+  slug: string;
+  title: string;
+  services: ServiceSlug[];
+  year?: number;
+  cover?: string;
+  featured: boolean;
+};
+
+type WpListItem = {
+  slug: string;
+  title: string;
+  featuredImage: { node: { sourceUrl: string } } | null;
+  servicios: { nodes: { slug: string }[] };
+  datosDelProyecto: { tituloEn: string | null; anio: number | null; destacado: boolean | null } | null;
+};
+
+const LIST_QUERY = /* GraphQL */ `
+  query ProjectsList {
+    proyectos(first: 100) {
+      nodes {
+        slug
+        title
+        featuredImage { node { sourceUrl } }
+        servicios { nodes { slug } }
+        datosDelProyecto { tituloEn anio destacado }
+      }
+    }
+  }
+`;
+
+/** Todos los proyectos publicados, en el orden del CMS. Si WordPress falla, lista vacía. */
+export async function fetchProjects(locale: Locale): Promise<ProjectCard[]> {
+  try {
+    const data = await wpClient.request<{ proyectos: { nodes: WpListItem[] } }>(LIST_QUERY);
+    return data.proyectos.nodes.map((p) => ({
+      slug: p.slug,
+      title: byLocale(p.title, p.datosDelProyecto?.tituloEn, locale) || p.title,
+      services: p.servicios.nodes.map((n) => n.slug as ServiceSlug),
+      year: p.datosDelProyecto?.anio ?? undefined,
+      cover: p.featuredImage?.node.sourceUrl,
+      featured: Boolean(p.datosDelProyecto?.destacado),
+    }));
+  } catch {
+    return [];
+  }
+}
+
+/* Proyectos con "Destacado en el home" */
+export async function fetchFeaturedProjects(locale: Locale, limit = 5): Promise<ProjectCard[]> {
+  return (await fetchProjects(locale)).filter((p) => p.featured).slice(0, limit);
+}
+
+/* ── Detalle ────────────────────────────────────────────────────────── */
 
 export type ProjectDetail = {
   slug: string;
@@ -37,6 +91,14 @@ type WpProject = {
   } | null;
 };
 
+type WpMedia = {
+  databaseId: number;
+  sourceUrl: string;
+  large: string | null;
+  altText: string | null;
+  mediaDetails: { width: number; height: number } | null;
+};
+
 const PROJECT_QUERY = /* GraphQL */ `
   query ProjectBySlug($slug: ID!) {
     proyecto(id: $slug, idType: SLUG) {
@@ -52,28 +114,36 @@ const PROJECT_QUERY = /* GraphQL */ `
   }
 `;
 
-const INDEX_QUERY = /* GraphQL */ `
-  query ProjectsIndex {
-    proyectos(first: 100) {
-      nodes { slug title }
+const MEDIA_QUERY = /* GraphQL */ `
+  query GalleryMedia($ids: [ID]) {
+    mediaItems(where: { in: $ids }, first: 100) {
+      nodes { databaseId sourceUrl large: sourceUrl(size: LARGE) altText mediaDetails { width height } }
     }
   }
 `;
 
-/** ES por defecto; EN con fallback al ES si la traducción viene vacía. */
-function byLocale(es: string | null | undefined, en: string | null | undefined, locale: Locale): string {
-  if (locale === "en") return (en && en.trim()) || es || "";
-  return es || "";
-}
+/**
+ * Galería a partir de los adjuntos que cita el contenido, consultados a la
+ * biblioteca de medios. Un adjunto borrado no vuelve en la consulta y
+ * simplemente no se pinta, en lugar de quedar como imagen rota.
+ */
+async function fetchGallery(content: string | null): Promise<GalleryImage[]> {
+  const ids = galleryIds(content);
+  if (ids.length === 0) return [];
 
-/** Lista ligera para generateStaticParams y la navegación "siguiente proyecto". */
-export async function fetchProjectSlugs(): Promise<{ slug: string; title: string }[]> {
-  try {
-    const data = await wpClient.request<{ proyectos: { nodes: { slug: string; title: string }[] } }>(INDEX_QUERY);
-    return data.proyectos.nodes;
-  } catch {
-    return [];
-  }
+  const data = await wpClient.request<{ mediaItems: { nodes: WpMedia[] } }>(MEDIA_QUERY, { ids });
+  const byId = new Map(data.mediaItems.nodes.map((m) => [m.databaseId, m]));
+
+  return ids.flatMap((id) => {
+    const m = byId.get(id);
+    if (!m) return [];
+    return [{
+      src: m.large || m.sourceUrl,
+      width: m.mediaDetails?.width ?? 0,
+      height: m.mediaDetails?.height ?? 0,
+      alt: m.altText ?? "",
+    }];
+  });
 }
 
 export async function fetchProjectBySlug(slug: string, locale: Locale): Promise<ProjectDetail | null> {
@@ -98,6 +168,6 @@ export async function fetchProjectBySlug(slug: string, locale: Locale): Promise<
         }
       : undefined,
     summary: byLocale(acf?.descripcionCorta, acf?.descripcionCortaEn, locale) || undefined,
-    images: parseGalleryImages(p.content),
+    images: await fetchGallery(p.content),
   };
 }

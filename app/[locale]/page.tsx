@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { getDictionary } from "@/src/content";
-import { featuredProjects, projects } from "@/src/data/projects";
+import { projects } from "@/src/data/projects";
 import { localizePath, resolveLocale } from "@/src/lib/i18n";
 import { pageMetadata } from "@/src/lib/seo";
+import { fetchFeaturedProjects } from "@/src/lib/projects-wp";
 import Hero from "@/src/components/home/Hero";
 import Stakes from "@/src/components/home/Stakes";
 import Process from "@/src/components/home/Process";
@@ -12,6 +13,9 @@ import FeaturedProjectsSection from "@/src/components/home/FeaturedProjectsSecti
 import CtaBand from "@/src/components/ui/CtaBand";
 
 type PageProps = { params: Promise<{ locale: string }> };
+
+// Los destacados vienen de WordPress: se revalidan cada hora sin redesplegar.
+export const revalidate = 86400;
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const locale = await resolveLocale(params);
@@ -29,9 +33,11 @@ export default async function HomePage({ params }: PageProps) {
   const locale = await resolveLocale(params);
   const dict = getDictionary(locale);
   const contactHref = localizePath(locale, "contacto");
+  const featured = await fetchFeaturedProjects(locale);
 
   return (
     <>
+      {/* El mosaico del hero es el único que sigue leyendo src/data/projects.ts */}
       <Hero
         title={dict.hero.title}
         subtitle={dict.hero.subtitle}
@@ -49,7 +55,7 @@ export default async function HomePage({ params }: PageProps) {
         <ServicesIndex locale={locale} dict={dict} />
       </section>
 
-      <FeaturedProjectsSection projects={featuredProjects} locale={locale} dict={dict} />
+      <FeaturedProjectsSection projects={featured} locale={locale} dict={dict} />
 
       <Process
         title={dict.home.process.title}

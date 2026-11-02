@@ -6,7 +6,7 @@ import { locales } from "@/src/content/config";
 import { getDictionary } from "@/src/content";
 import { localizePath, resolveLocale } from "@/src/lib/i18n";
 import { pageMetadata } from "@/src/lib/seo";
-import { fetchProjectBySlug, fetchProjectSlugs } from "@/src/lib/projects-wp";
+import { fetchProjectBySlug, fetchProjects } from "@/src/lib/projects-wp";
 import CtaBand from "@/src/components/ui/CtaBand";
 import ProjectGallery from "@/src/components/work/ProjectGallery";
 
@@ -17,8 +17,8 @@ export const dynamicParams = true;
 export const revalidate = 3600; // revalida cada hora
 
 export async function generateStaticParams() {
-  const slugs = await fetchProjectSlugs();
-  return locales.flatMap((locale) => slugs.map((s) => ({ locale, slug: s.slug })));
+  const projects = await fetchProjects("es");
+  return locales.flatMap((locale) => projects.map((p) => ({ locale, slug: p.slug })));
 }
 
 async function resolve(params: PageProps["params"]) {
@@ -54,7 +54,7 @@ export default async function ProjectPage({ params }: PageProps) {
   const meta = [project.year ? String(project.year) : null, services].filter(Boolean).join(" · ");
 
   // Siguiente proyecto, en el orden del CMS.
-  const all = await fetchProjectSlugs();
+  const all = await fetchProjects(locale);
   const index = all.findIndex((p) => p.slug === project.slug);
   const next = all.length > 0 ? all[(index + 1) % all.length] : null;
 

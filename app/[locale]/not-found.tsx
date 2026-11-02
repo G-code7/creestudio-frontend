@@ -7,5 +7,12 @@ import NotFoundView from "@/src/components/layout/NotFoundView";
  * idiomas y el componente cliente elige según la URL (sin enviar los diccionarios enteros).
  */
 export default function NotFound() {
-  return <NotFoundView copy={{ es: es.notFound, en: en.notFound }} />;
+  return (
+    <NotFoundView
+      copy={{
+        es: { ...es.notFound, work: es.nav.work },
+        en: { ...en.notFound, work: en.nav.work },
+      }}
+    />
+  );
 }
