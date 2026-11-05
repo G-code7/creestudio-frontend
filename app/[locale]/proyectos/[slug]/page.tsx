@@ -53,7 +53,6 @@ export default async function ProjectPage({ params }: PageProps) {
   const { locale, project, dict } = await resolve(params);
 
   const services = project.services.map((s) => dict.services.items[s]?.name).filter(Boolean).join(", ");
-  const meta = [project.year ? String(project.year) : null, services].filter(Boolean).join(" · ");
 
   // Siguiente proyecto, en el orden del CMS.
   const all = await fetchProjects(locale);
@@ -69,6 +68,7 @@ export default async function ProjectPage({ params }: PageProps) {
             alt=""
             fill
             priority
+            quality={90}
             sizes="100vw"
             unoptimized={project.cover.src.endsWith(".gif")}
             className="object-cover"
@@ -77,48 +77,45 @@ export default async function ProjectPage({ params }: PageProps) {
           <div className="absolute inset-0 bg-slate" />
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/35 to-transparent" />
-        <div className="container-site relative z-10 pb-16 md:pb-24">
-          {meta ? <p className="font-sans text-sm text-paper/80 md:text-base">{meta}</p> : null}
-          <h1 className="mt-3 max-w-4xl font-display text-5xl font-bold leading-[1.02] tracking-tight text-paper sm:text-6xl md:text-8xl">
+
+        {/* Título a la izquierda; servicio y año a la derecha */}
+        <div className="container-site relative z-10 flex w-full flex-col gap-6 pb-16 md:flex-row md:items-end md:justify-between md:pb-24">
+          <h1 className="max-w-4xl text-left font-display text-5xl font-bold leading-[1.02] tracking-tight text-paper sm:text-6xl md:text-8xl">
             {project.title}
           </h1>
+          <div className="font-sans text-sm text-paper/80 md:text-right md:text-base">
+            {services ? <p>{services}</p> : null}
+            {project.year ? <p className="mt-1">{project.year}</p> : null}
+          </div>
         </div>
       </header>
 
-      {/* Body: izquierda información (sticky), derecha galería que se auto-organiza. */}
-      <section className="container-site py-16 md:py-24">
-        <div className="grid gap-10 md:grid-cols-[minmax(0,1fr)_minmax(0,1.8fr)] md:gap-16">
-          <div className="md:sticky md:top-28 md:self-start">
-            {project.summary ? (
-              <p className="font-display text-xl font-medium leading-snug tracking-tight text-ink md:text-2xl">
-                {project.summary}
-              </p>
+      {/* Body: sidebar 1/3 pegado a la izquierda, galería 2/3 pegada a la derecha, sin márgenes. */}
+      <section className="grid md:grid-cols-3">
+        <div className="px-6 py-12 md:sticky md:top-28 md:self-start md:px-10 md:py-16">
+          {project.summary ? (
+            <p className="font-display text-xl font-medium leading-snug tracking-tight text-ink md:text-2xl">
+              {project.summary}
+            </p>
+          ) : null}
+          <dl className="mt-8 flex flex-col gap-5 border-t border-line pt-6">
+            {services ? (
+              <div>
+                <dt className="font-sans text-sm text-slate-soft">{dict.work.servicesLabel}</dt>
+                <dd className="mt-1 font-sans text-base text-ink">{services}</dd>
+              </div>
             ) : null}
-            <dl className="mt-8 flex flex-col gap-5 border-t border-line pt-6">
-              {services ? (
-                <div>
-                  <dt className="font-sans text-sm text-slate-soft">{dict.work.servicesLabel}</dt>
-                  <dd className="mt-1 font-sans text-base text-ink">{services}</dd>
-                </div>
-              ) : null}
-              {project.year ? (
-                <div>
-                  <dt className="font-sans text-sm text-slate-soft">{dict.work.yearLabel}</dt>
-                  <dd className="mt-1 font-sans text-base text-ink">{project.year}</dd>
-                </div>
-              ) : null}
-            </dl>
-          </div>
+            {project.year ? (
+              <div>
+                <dt className="font-sans text-sm text-slate-soft">{dict.work.yearLabel}</dt>
+                <dd className="mt-1 font-sans text-base text-ink">{project.year}</dd>
+              </div>
+            ) : null}
+          </dl>
+        </div>
 
-          <div>
-            {project.images.length > 0 ? (
-              <ProjectGallery images={project.images} />
-            ) : (
-              <p className="font-sans text-sm text-slate-soft">
-                {/* Sin imágenes en el cuerpo del proyecto todavía. */}
-              </p>
-            )}
-          </div>
+        <div className="md:col-span-2">
+          {project.images.length > 0 ? <ProjectGallery images={project.images} /> : null}
         </div>
       </section>
 
