@@ -169,7 +169,7 @@ async function fetchGallery(content: string | null): Promise<GalleryImage[]> {
     if (!m || used.has(m.databaseId)) return [];
     used.add(m.databaseId);
     return [{
-      src: m.large || m.sourceUrl,
+      src: m.sourceUrl,
       width: m.mediaDetails?.width ?? 0,
       height: m.mediaDetails?.height ?? 0,
       alt: m.altText ?? "",
