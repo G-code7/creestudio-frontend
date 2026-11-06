@@ -79,7 +79,7 @@ export default async function ProjectPage({ params }: PageProps) {
         <div className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/35 to-transparent" />
 
         {/* Título a la izquierda; servicio y año a la derecha */}
-        <div className="container-site relative z-10 flex w-full flex-col gap-6 pb-16 md:flex-row md:items-end md:justify-between md:pb-24">
+        <div className="relative z-10 flex w-full flex-col gap-6 px-6 pb-16 md:flex-row md:items-end md:justify-between md:px-10 md:pb-24">
           <h1 className="max-w-4xl text-left font-display text-5xl font-bold leading-[1.02] tracking-tight text-paper sm:text-6xl md:text-8xl">
             {project.title}
           </h1>
