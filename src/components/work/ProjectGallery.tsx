@@ -20,7 +20,8 @@ export default function ProjectGallery({ images }: { images: GalleryImage[] }) {
               src={im.src}
               alt={im.alt}
               fill
-              sizes={full ? "(min-width: 768px) 66vw, 100vw" : "(min-width: 768px) 33vw, 50vw"}
+              quality={100}
+              sizes="(min-width: 768px) 66vw, 100vw"
               unoptimized={im.src.endsWith(".gif")}
               className="object-cover"
             />
