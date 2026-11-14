@@ -322,6 +322,7 @@ const es: Dictionary = {
     servicesLabel: "Servicios",
     yearLabel: "Año",
     locationLabel: "Ubicación",
+    prev: "Proyecto anterior",
     next: "Siguiente proyecto",
   },
   contact: {

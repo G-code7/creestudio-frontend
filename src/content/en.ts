@@ -314,6 +314,7 @@ const en: Dictionary = {
     servicesLabel: "Services",
     yearLabel: "Year",
     locationLabel: "Location",
+    prev: "Previous project",
     next: "Next project",
   },
   contact: {

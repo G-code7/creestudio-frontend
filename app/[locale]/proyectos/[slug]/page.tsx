@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { locales } from "@/src/content/config";
 import { getDictionary } from "@/src/content";
@@ -9,6 +8,7 @@ import { pageMetadata } from "@/src/lib/seo";
 import { fetchProjectBySlug, fetchProjects } from "@/src/lib/projects-wp";
 import CtaBand from "@/src/components/ui/CtaBand";
 import ProjectGallery from "@/src/components/work/ProjectGallery";
+import ProjectPager from "@/src/components/work/ProjectPager";
 
 type PageProps = { params: Promise<{ locale: string; slug: string }> };
 
@@ -54,10 +54,14 @@ export default async function ProjectPage({ params }: PageProps) {
 
   const services = project.services.map((s) => dict.services.items[s]?.name).filter(Boolean).join(", ");
 
-  // Siguiente proyecto, en el orden del CMS.
-  const all = await fetchProjects(locale);
-  const index = all.findIndex((p) => p.slug === project.slug);
-  const next = all.length > 0 ? all[(index + 1) % all.length] : null;
+  // Anterior y siguiente, en el orden del CMS (circular). Con 2 proyectos solo se muestra "siguiente".
+  const list = await fetchProjects(locale);
+  const index = list.findIndex((p) => p.slug === project.slug);
+  const all = list.filter((p) => p.slug !== project.slug);
+  const toItem = (p: (typeof all)[number] | undefined) =>
+    p ? { project: p, href: localizePath(locale, `proyectos/${p.slug}`) } : null;
+  const next = toItem(all[index < 0 ? 0 : index % Math.max(all.length, 1)]);
+  const prev = all.length > 1 && index >= 0 ? toItem(all[(index - 1 + all.length) % all.length]) : null;
 
   return (
     <>
@@ -119,17 +123,12 @@ export default async function ProjectPage({ params }: PageProps) {
         </div>
       </section>
 
-      {next ? (
-        <nav aria-label={dict.work.next} className="container-site border-t border-line py-16 md:py-24">
-          <p className="font-sans text-sm text-slate-soft">{dict.work.next}</p>
-          <Link
-            href={localizePath(locale, `proyectos/${next.slug}`)}
-            className="mt-3 inline-block font-display text-4xl font-bold tracking-tight text-ink underline-offset-8 transition-colors hover:text-brand hover:underline md:text-6xl"
-          >
-            {next.title}
-          </Link>
-        </nav>
-      ) : null}
+      <ProjectPager
+        label={dict.nav.work}
+        prev={prev}
+        next={next}
+        labels={{ prev: dict.work.prev, next: dict.work.next }}
+      />
 
       <CtaBand
         title={dict.home.cta.title}
@@ -138,4 +137,4 @@ export default async function ProjectPage({ params }: PageProps) {
       />
     </>
   );
-}
+}

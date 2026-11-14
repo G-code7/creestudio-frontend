@@ -132,6 +132,7 @@ export type Dictionary = {
     servicesLabel: string;
     yearLabel: string;
     locationLabel: string;
+    prev: string;
     next: string;
   };
   contact: {
