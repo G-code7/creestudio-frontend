@@ -85,6 +85,7 @@ export type Dictionary = {
     label: string;
     services: string;
     work: string;
+    blog: string;
     contact: string;
     menu: string;
     close: string;
@@ -162,6 +163,21 @@ export type Dictionary = {
     sections: { title: string; body: string[] }[];
   };
   notFound: { title: string; text: string; home: string };
+  blog: {
+    metaTitle: string;
+    metaDescription: string;
+    title: string;
+    intro: string;
+    /** Filtro "todas las categorías". */
+    all: string;
+    empty: { title: string; text: string };
+    /** "{n} min de lectura" */
+    readingTime: string;
+    more: string;
+    back: string;
+    /** Aviso en la versión en inglés: el artículo está en español. */
+    langNote: string;
+  };
   footer: {
     tagline: string;
     navTitle: string;

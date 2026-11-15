@@ -18,6 +18,7 @@ const es: Dictionary = {
     label: "Principal",
     services: "Servicios",
     work: "Proyectos",
+    blog: "Blog",
     contact: "Contacto",
     menu: "Menú",
     close: "Cerrar",
@@ -489,6 +490,22 @@ const es: Dictionary = {
     title: "Esta página no existe.",
     text: "Puede que el enlace haya cambiado. Vuelve al inicio o revisa nuestros proyectos.",
     home: "Volver al inicio",
+  },
+  blog: {
+    metaTitle: "Blog de branding y diseño",
+    metaDescription:
+      "Ideas sobre branding, identidad visual, naming, packaging y diseño web para marcas que quieren crecer. El blog de Cree Studio.",
+    title: "Blog",
+    intro: "Lo que aprendemos construyendo marcas: estrategia, diseño y negocio, sin relleno.",
+    all: "Todo",
+    empty: {
+      title: "Estamos escribiendo.",
+      text: "Pronto publicaremos los primeros artículos. Mientras tanto, mira lo que hemos construido.",
+    },
+    readingTime: "{n} min de lectura",
+    more: "Más artículos",
+    back: "Blog",
+    langNote: "",
   },
   footer: {
     tagline:
