@@ -123,6 +123,10 @@ export type Dictionary = {
     intro: string;
     disciplinesLabel: string;
     perMonth: string;
+    prevService: string;
+    nextService: string;
+    /** Caja 3D de la página de Packaging. */
+    box: { open: string; close: string; hint: string };
     problemLabel: string;
     includesLabel: string;
     excludesLabel: string;
