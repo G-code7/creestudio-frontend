@@ -8,14 +8,17 @@ import type { Locale } from "@/src/content/config";
 import type { Dictionary } from "@/src/content/types";
 import type { ProjectCard } from "@/src/lib/projects-wp";
 import { localizePath } from "@/src/lib/i18n";
+import Button from "@/src/components/ui/Button";
+import RevealHeading from "@/src/components/ui/RevealHeading";
 
 /*
  * Pila de proyectos destacados. Cada panel ocupa la pantalla y queda fijo
  * (sticky); el siguiente sube y lo tapa. El panel cubierto no se mueve: solo
  * se oscurece un poco mientras lo cubren, para que la superposición se lea.
  *
- * El título de la sección vive dentro del primer panel, y "Ver todos" flota
- * en la esquina superior derecha por encima de toda la pila.
+ * El título y "Ver todos" van arriba, sobre blanco, como en el resto de
+ * secciones. En móvil los paneles son más bajos (casi 4:3) para no recortar
+ * tanto las portadas horizontales; desde md ocupan la pantalla.
  *
  * Imágenes sin optimizar: api.creestudio.es rechaza las peticiones del
  * optimizador de Next (ver ProjectGallery).
@@ -70,77 +73,71 @@ export default function FeaturedProjectsSection({ projects, locale, dict }: Prop
   if (projects.length === 0) return null;
 
   return (
-    <section ref={root} aria-labelledby="featured-title" className="relative bg-ink">
-      {/* "Ver todos": flota sobre toda la pila. h-0 para no empujar el contenido. */}
-      <div className="pointer-events-none sticky top-0 z-30 h-0">
-        <div className="container-site flex justify-end pt-24 md:pt-28">
-          <Link
-            href={localizePath(locale, "proyectos")}
-            className="pointer-events-auto rounded-full bg-paper px-5 py-2.5 font-sans text-sm font-medium text-ink transition-colors hover:bg-ink hover:text-paper"
-          >
-            {dict.home.work.all}
-          </Link>
-        </div>
+    <section ref={root} aria-labelledby="featured-title">
+      <div className="container-site flex flex-wrap items-end justify-between gap-x-8 gap-y-6 pt-24 pb-12 md:pt-32 md:pb-16">
+        <RevealHeading
+          id="featured-title"
+          text={dict.home.work.title}
+          className="font-display text-3xl font-bold tracking-tight text-ink md:text-5xl"
+        />
+        <Button href={localizePath(locale, "proyectos")} variant="ghost">
+          {dict.home.work.all}
+        </Button>
       </div>
 
-      {projects.map((project, i) => {
-        const services = project.services
-          .map((slug) => dict.services.items[slug]?.name)
-          .filter(Boolean)
-          .join(", ");
+      <div className="relative bg-ink">
+        {projects.map((project, i) => {
+          const services = project.services
+            .map((slug) => dict.services.items[slug]?.name)
+            .filter(Boolean)
+            .join(", ");
 
-        return (
-          <article key={project.slug} data-panel className="sticky top-0 h-svh overflow-hidden">
-            <Link
-              href={localizePath(locale, `proyectos/${project.slug}`)}
-              className="group block size-full"
+          return (
+            <article
+              key={project.slug}
+              data-panel
+              className="sticky top-0 h-[max(19rem,80vw)] overflow-hidden md:h-svh"
             >
-              {project.cover ? (
-                <Image
-                  src={project.cover}
-                  alt=""
-                  fill
-                  unoptimized
-                  priority={i === 0}
-                  sizes="100vw"
-                  className="object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.03]"
-                />
-              ) : (
-                <div className="absolute inset-0 bg-slate" />
-              )}
+              <Link
+                href={localizePath(locale, `proyectos/${project.slug}`)}
+                className="group block size-full"
+              >
+                {project.cover ? (
+                  <Image
+                    src={project.cover}
+                    alt=""
+                    fill
+                    unoptimized
+                    priority={i === 0}
+                    sizes="100vw"
+                    className="object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.03]"
+                  />
+                ) : (
+                  <div className="absolute inset-0 bg-slate" />
+                )}
 
-              {/* Legibilidad del texto: degradado solo arriba y abajo. */}
-              <div className="absolute inset-0 bg-gradient-to-b from-ink/50 via-transparent to-ink/75" />
+                {/* Legibilidad del texto: degradado solo abajo, donde va el título. */}
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent from-40% to-ink/80" />
 
-              {/* Se oscurece mientras el siguiente panel lo cubre. */}
-              <div data-shade className="pointer-events-none absolute inset-0 z-10 bg-ink opacity-0" />
+                {/* Se oscurece mientras el siguiente panel lo cubre. */}
+                <div data-shade className="pointer-events-none absolute inset-0 z-10 bg-ink opacity-0" />
 
-              {i === 0 ? (
-                <div className="container-site absolute inset-x-0 top-0 z-20 pt-24 md:pt-28">
-                  <h2
-                    id="featured-title"
-                    className="font-display text-3xl font-bold tracking-tight text-paper md:text-5xl"
-                  >
-                    {dict.home.work.title}
-                  </h2>
+                <div className="container-site absolute inset-x-0 bottom-0 z-20 pb-8 md:pb-20">
+                  <div className="flex flex-wrap items-end justify-between gap-x-10 gap-y-3">
+                    <h3 className="max-w-3xl font-display text-3xl font-bold leading-[1.02] tracking-tight text-paper sm:text-4xl md:text-7xl">
+                      {project.title}
+                    </h3>
+                    <p className="font-sans text-sm text-paper/80 md:pb-3 md:text-right md:text-base">
+                      {services}
+                      {project.year ? <span className="block tabular-nums">{project.year}</span> : null}
+                    </p>
+                  </div>
                 </div>
-              ) : null}
-
-              <div className="container-site absolute inset-x-0 bottom-0 z-20 pb-14 md:pb-20">
-                <div className="flex flex-wrap items-end justify-between gap-x-10 gap-y-3">
-                  <h3 className="max-w-3xl font-display text-4xl font-bold leading-[1.02] tracking-tight text-paper md:text-7xl">
-                    {project.title}
-                  </h3>
-                  <p className="font-sans text-sm text-paper/80 md:pb-3 md:text-right md:text-base">
-                    {services}
-                    {project.year ? <span className="block tabular-nums">{project.year}</span> : null}
-                  </p>
-                </div>
-              </div>
-            </Link>
-          </article>
-        );
-      })}
+              </Link>
+            </article>
+          );
+        })}
+      </div>
     </section>
   );
-}
+}

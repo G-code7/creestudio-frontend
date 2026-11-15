@@ -8,10 +8,11 @@ type RevealHeadingProps = {
   text: string;
   as?: ElementType;
   className?: string;
+  id?: string;
 };
 
 /** Título cuyas palabras suben desde una máscara al entrar en pantalla. */
-export default function RevealHeading({ text, as: Tag = "h2", className }: RevealHeadingProps) {
+export default function RevealHeading({ text, as: Tag = "h2", className, id }: RevealHeadingProps) {
   const ref = useRef<HTMLElement>(null);
 
   useGSAP(
@@ -32,7 +33,7 @@ export default function RevealHeading({ text, as: Tag = "h2", className }: Revea
   );
 
   return (
-    <Tag ref={ref} className={className}>
+    <Tag ref={ref} id={id} className={className}>
       <Words text={text} />
     </Tag>
   );

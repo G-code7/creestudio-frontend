@@ -3,7 +3,7 @@ import { getDictionary } from "@/src/content";
 import { fetchProjects } from "@/src/lib/projects-wp";
 import { localizePath, resolveLocale } from "@/src/lib/i18n";
 import { pageMetadata } from "@/src/lib/seo";
-import ProjectsHero from "@/src/components/work/ProjectsHero";
+import ProjectsHero from "@/src/components/pages/proyectos/ProjectsHero";
 import CtaBand from "@/src/components/ui/CtaBand";
 
 type PageProps = { params: Promise<{ locale: string }> };
@@ -46,4 +46,4 @@ export default async function WorkPage({ params }: PageProps) {
       />
     </>
   );
-}
+}

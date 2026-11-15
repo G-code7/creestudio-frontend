@@ -109,6 +109,8 @@ const es: Dictionary = {
     title: "Servicios",
     intro:
       "Cinco disciplinas que trabajan juntas. Puedes empezar por una o construir la marca completa con nosotros.",
+    disciplinesLabel: "Disciplinas",
+    perMonth: "Cada mes",
     problemLabel: "El problema",
     includesLabel: "Qué incluye",
     excludesLabel: "Qué no incluye",

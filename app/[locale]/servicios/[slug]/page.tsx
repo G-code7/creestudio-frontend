@@ -7,7 +7,7 @@ import { localizePath, resolveLocale } from "@/src/lib/i18n";
 import { pageMetadata } from "@/src/lib/seo";
 import Button from "@/src/components/ui/Button";
 import CtaBand from "@/src/components/ui/CtaBand";
-import WorkGrid from "@/src/components/work/WorkGrid";
+import WorkGrid from "@/src/components/shared/WorkGrid";
 
 type PageProps = { params: Promise<{ locale: string; slug: string }> };
 

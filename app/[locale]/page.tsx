@@ -9,7 +9,7 @@ import Stakes from "@/src/components/home/Stakes";
 import Process from "@/src/components/home/Process";
 import AfterLaunch from "@/src/components/home/AfterLaunch";
 import ProcessPath from "@/src/components/home/ProcessPath";
-import ServicesIndex from "@/src/components/services/ServicesIndex";
+import ServicesIndex from "@/src/components/shared/ServicesIndex";
 import FeaturedProjectsSection from "@/src/components/home/FeaturedProjectsSection";
 import CtaBand from "@/src/components/ui/CtaBand";
 import RevealHeading from "@/src/components/ui/RevealHeading";

@@ -72,7 +72,10 @@ export default function ProjectMosaic({ projects }: ProjectMosaicProps) {
             });
 
             if (!figure) return;
+            const media = figure.querySelector<HTMLElement>("[data-media]");
 
+            // Entrada y salida con máscara (clip-path), sin tocar la opacidad:
+            // la imagen siempre se ve con su color real, nunca lavada sobre el lavanda.
             gsap
               .timeline({
                 scrollTrigger: {
@@ -85,11 +88,36 @@ export default function ProjectMosaic({ projects }: ProjectMosaicProps) {
               })
               .fromTo(
                 figure,
-                { autoAlpha: 0, yPercent: 14, scale: 0.94 },
-                { autoAlpha: 1, yPercent: 0, scale: 1, ease: "power2.out", duration: 0.35 }
+                { clipPath: "inset(18% 8% 0% 8% round 28px)", yPercent: 10 },
+                { clipPath: "inset(0% 0% 0% 0% round 16px)", yPercent: 0, ease: "power2.out", duration: 0.35 }
               )
               .to(figure, { duration: 0.3 })
-              .to(figure, { autoAlpha: 0, yPercent: -10, scale: 0.96, ease: "power2.in", duration: 0.35 });
+              .to(figure, {
+                clipPath: "inset(0% 5% 14% 5% round 24px)",
+                yPercent: -6,
+                ease: "power2.in",
+                duration: 0.35,
+              });
+
+            // Profundidad: la imagen se desplaza dentro del marco más lento que el marco.
+            if (media) {
+              gsap.fromTo(
+                media,
+                { yPercent: -7, scale: 1.14 },
+                {
+                  yPercent: 7,
+                  scale: 1.04,
+                  ease: "none",
+                  scrollTrigger: {
+                    trigger: slot,
+                    start: "top bottom",
+                    end: "bottom top",
+                    scrub: true,
+                    invalidateOnRefresh: true,
+                  },
+                }
+              );
+            }
           });
         }
       );
@@ -122,18 +150,20 @@ export default function ProjectMosaic({ projects }: ProjectMosaicProps) {
             <figure
               data-figure
               aria-hidden
-              className="relative overflow-hidden rounded-xl bg-mist"
+              className="relative overflow-hidden rounded-2xl bg-mist [clip-path:inset(0_round_16px)]"
               style={{ aspectRatio: slot.ratio }}
             >
               {hasImage ? (
-                <>
+                <div data-media className="absolute inset-0 will-change-transform">
                   {project.poster && (
                     <Image
                       src={project.poster}
                       alt=""
                       width={900}
                       height={1100}
+                      quality={90}
                       sizes="(min-width: 1024px) 30vw, 45vw"
+                      loading={i < 3 ? "eager" : "lazy"}
                       className="absolute inset-0 size-full object-cover"
                     />
                   )}
@@ -154,25 +184,28 @@ export default function ProjectMosaic({ projects }: ProjectMosaicProps) {
                       alt=""
                       width={900}
                       height={1100}
+                      quality={90}
                       sizes="(min-width: 1024px) 30vw, 45vw"
+                      loading={i < 3 ? "eager" : "lazy"}
                       // El optimizador no reduce GIF animados: se sirve el original una sola vez.
                       unoptimized={isGif(project.cover)}
-                      className={`relative z-10 size-full object-cover ${project.poster ? "opacity-0 transition-opacity duration-700" : ""}`}
+                      // Entra suave al cargar (sobre el póster si lo hay, si no sobre el fondo).
+                      className="relative z-10 size-full object-cover opacity-0 transition-opacity duration-700"
                       onLoad={(e) => {
-                        if (project.poster) {
-                          (e.target as HTMLElement).style.opacity = "1";
-                        }
+                        (e.target as HTMLElement).style.opacity = "1";
                       }}
                     />
                   )}
-                </>
+                </div>
               ) : (
                 <div className={`size-full ${PLACEHOLDERS[i % PLACEHOLDERS.length]}`} />
               )}
+              {/* Filo interior muy sutil: separa la imagen del lavanda sin sombra pesada */}
+              <span aria-hidden className="pointer-events-none absolute inset-0 z-20 rounded-[inherit] ring-1 ring-inset ring-ink/10" />
             </figure>
           </div>
         );
       })}
     </div>
   );
-}
+}

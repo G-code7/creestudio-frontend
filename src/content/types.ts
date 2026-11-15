@@ -121,6 +121,8 @@ export type Dictionary = {
     metaDescription: string;
     title: string;
     intro: string;
+    disciplinesLabel: string;
+    perMonth: string;
     problemLabel: string;
     includesLabel: string;
     excludesLabel: string;

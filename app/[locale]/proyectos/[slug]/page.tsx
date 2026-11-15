@@ -7,8 +7,8 @@ import { localizePath, resolveLocale } from "@/src/lib/i18n";
 import { pageMetadata } from "@/src/lib/seo";
 import { fetchProjectBySlug, fetchProjects } from "@/src/lib/projects-wp";
 import CtaBand from "@/src/components/ui/CtaBand";
-import ProjectGallery from "@/src/components/work/ProjectGallery";
-import ProjectPager from "@/src/components/work/ProjectPager";
+import ProjectGallery from "@/src/components/pages/proyectos/ProjectGallery";
+import ProjectPager from "@/src/components/pages/proyectos/ProjectPager";
 
 type PageProps = { params: Promise<{ locale: string; slug: string }> };
 

@@ -102,6 +102,8 @@ const en: Dictionary = {
     title: "Services",
     intro:
       "Five disciplines that work together. Start with one, or build the whole brand with us.",
+    disciplinesLabel: "Disciplines",
+    perMonth: "Every month",
     problemLabel: "The problem",
     includesLabel: "What’s included",
     excludesLabel: "What’s not included",
