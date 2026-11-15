@@ -56,6 +56,11 @@ export default function Footer({ locale, dict }: FooterProps) {
               </Link>
             </li>
             <li>
+              <Link href={localizePath(locale, "blog")} className={linkClass}>
+                {dict.nav.blog}
+              </Link>
+            </li>
+            <li>
               <Link href={localizePath(locale, "contacto")} className={linkClass}>
                 {dict.nav.contact}
               </Link>

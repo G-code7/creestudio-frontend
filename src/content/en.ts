@@ -11,6 +11,7 @@ const en: Dictionary = {
     label: "Main",
     services: "Services",
     work: "Work",
+    blog: "Blog",
     contact: "Contact",
     menu: "Menu",
     close: "Close",
@@ -479,6 +480,22 @@ const en: Dictionary = {
     title: "This page doesn’t exist.",
     text: "The link may have changed. Go back to the homepage or browse our work.",
     home: "Back to homepage",
+  },
+  blog: {
+    metaTitle: "Branding and design blog",
+    metaDescription:
+      "Ideas on branding, visual identity, naming, packaging and web design for brands that want to grow. The Cree Studio blog.",
+    title: "Blog",
+    intro: "What we learn building brands: strategy, design and business, no filler.",
+    all: "All",
+    empty: {
+      title: "We’re writing.",
+      text: "Our first articles are coming soon. In the meantime, take a look at what we’ve built.",
+    },
+    readingTime: "{n} min read",
+    more: "More articles",
+    back: "Blog",
+    langNote: "This article is only available in Spanish for now.",
   },
   footer: {
     tagline: "Creative studio for branding, visual identity, naming, packaging and web design.",

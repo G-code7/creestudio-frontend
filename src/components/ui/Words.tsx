@@ -12,7 +12,7 @@ export default function Words({ text, variant = "mask" }: { text: string; varian
         {text.split(" ").map((word, i) =>
           variant === "mask" ? (
             <span key={i}>
-              <span data-word className="inline-block overflow-hidden pb-[0.08em] align-bottom">
+              <span data-word className="inline-block overflow-hidden pb-[0.15em] align-bottom">
                 <span className="inline-block">{word}</span>
               </span>{" "}
             </span>
