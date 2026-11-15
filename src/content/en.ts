@@ -31,6 +31,9 @@ const en: Dictionary = {
   home: {
     stakes: {
       title: "Three signs your brand is holding you back",
+      signal: "Sign",
+      answerLabel: "How we fix it",
+      outro: "Recognize yourself in any of these? Your business isn’t the problem. How it looks is.",
       items: [
         {
           fear: "“My brand looks like everyone else’s.”",
@@ -99,6 +102,11 @@ const en: Dictionary = {
     title: "Services",
     intro:
       "Five disciplines that work together. Start with one, or build the whole brand with us.",
+    disciplinesLabel: "Disciplines",
+    perMonth: "Every month",
+    prevService: "Previous discipline",
+    nextService: "Next discipline",
+    box: { open: "Open the box", close: "Close the box", hint: "Drag to rotate it" },
     problemLabel: "The problem",
     includesLabel: "What’s included",
     excludesLabel: "What’s not included",
@@ -314,6 +322,7 @@ const en: Dictionary = {
     servicesLabel: "Services",
     yearLabel: "Year",
     locationLabel: "Location",
+    prev: "Previous project",
     next: "Next project",
   },
   contact: {

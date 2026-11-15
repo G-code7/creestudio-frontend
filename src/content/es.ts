@@ -38,6 +38,9 @@ const es: Dictionary = {
   home: {
     stakes: {
       title: "Tres señales de que tu marca te está frenando",
+      signal: "Señal",
+      answerLabel: "Cómo lo resolvemos",
+      outro: "¿Te reconociste en alguna? El problema no es tu negocio: es cómo se ve.",
       items: [
         {
           fear: "“Mi marca se ve como la de cualquiera.”",
@@ -57,7 +60,7 @@ const es: Dictionary = {
       ],
     },
     services: { title: "Lo que hacemos" },
-    work: { title: "Trabajo reciente", all: "Ver todos los proyectos" },
+    work: { title: "Trabajos recientes", all: "Ver todos los proyectos" },
     process: {
       title: "Así trabajamos",
       intro:
@@ -106,6 +109,11 @@ const es: Dictionary = {
     title: "Servicios",
     intro:
       "Cinco disciplinas que trabajan juntas. Puedes empezar por una o construir la marca completa con nosotros.",
+    disciplinesLabel: "Disciplinas",
+    perMonth: "Cada mes",
+    prevService: "Disciplina anterior",
+    nextService: "Siguiente disciplina",
+    box: { open: "Abrir la caja", close: "Cerrar la caja", hint: "Arrastra para girarla" },
     problemLabel: "El problema",
     includesLabel: "Qué incluye",
     excludesLabel: "Qué no incluye",
@@ -322,6 +330,7 @@ const es: Dictionary = {
     servicesLabel: "Servicios",
     yearLabel: "Año",
     locationLabel: "Ubicación",
+    prev: "Proyecto anterior",
     next: "Siguiente proyecto",
   },
   contact: {

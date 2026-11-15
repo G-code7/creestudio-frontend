@@ -6,25 +6,30 @@ import { site } from "@/src/lib/site";
 
 type FooterProps = { locale: Locale; dict: Dictionary };
 
-const linkClass = "font-sans text-sm text-slate transition-colors hover:text-brand-ink";
-const titleClass = "font-display text-sm font-semibold text-ink";
+const linkClass = "font-sans text-sm text-paper/65 transition-colors hover:text-cree";
+const titleClass = "font-display text-sm font-semibold text-paper";
 
 export default function Footer({ locale, dict }: FooterProps) {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-line">
-      <div className="container-site grid gap-12 py-16 md:grid-cols-12">
-        <div className="md:col-span-5">
-          <Link href={localizePath(locale)} className="font-display text-xl font-bold tracking-tight text-ink">
-            {site.name}
-          </Link>
-          <p className="mt-4 max-w-sm font-sans text-sm leading-relaxed text-slate-soft">
-            {dict.footer.tagline}
-          </p>
-        </div>
+    <footer className="bg-ink text-paper">
+      {/* Logo protagonista. Si luego hay SVG del logo, va aquí en lugar del texto. */}
+      <div className="container-site pt-20 pb-14 md:pt-28 md:pb-20">
+        <Link
+          href={localizePath(locale)}
+          className="block text-center font-display font-bold leading-[0.9] tracking-tighter whitespace-nowrap transition-colors duration-500 hover:text-cree"
+          style={{ fontSize: "clamp(2.75rem, 11.5vw, 9.5rem)" }}
+        >
+          {site.name}
+        </Link>
+        <p className="mx-auto mt-6 max-w-md text-center font-sans text-sm leading-relaxed text-paper/65 md:text-base">
+          {dict.footer.tagline}
+        </p>
+      </div>
 
-        <nav aria-label={dict.footer.servicesTitle} className="md:col-span-3">
+      <div className="container-site grid gap-10 border-t border-paper/10 py-14 sm:grid-cols-3">
+        <nav aria-label={dict.footer.servicesTitle}>
           <h2 className={titleClass}>{dict.footer.servicesTitle}</h2>
           <ul className="mt-4 flex flex-col gap-2.5">
             {serviceSlugs.map((slug) => (
@@ -37,7 +42,7 @@ export default function Footer({ locale, dict }: FooterProps) {
           </ul>
         </nav>
 
-        <nav aria-label={dict.footer.navTitle} className="md:col-span-2">
+        <nav aria-label={dict.footer.navTitle}>
           <h2 className={titleClass}>{dict.footer.navTitle}</h2>
           <ul className="mt-4 flex flex-col gap-2.5">
             <li>
@@ -59,7 +64,7 @@ export default function Footer({ locale, dict }: FooterProps) {
         </nav>
 
         {site.social.length > 0 ? (
-          <div className="md:col-span-2">
+          <div>
             <h2 className={titleClass}>{dict.footer.socialTitle}</h2>
             <ul className="mt-4 flex flex-col gap-2.5">
               {site.social.map((s) => (
@@ -74,11 +79,11 @@ export default function Footer({ locale, dict }: FooterProps) {
         ) : null}
       </div>
 
-      <div className="container-site flex flex-col gap-3 border-t border-line py-6 font-sans text-xs text-slate-soft sm:flex-row sm:justify-between">
+      <div className="container-site flex flex-col gap-3 border-t border-paper/10 py-6 font-sans text-xs text-paper/50 sm:flex-row sm:justify-between">
         <p>
           © {year} {site.name}. {dict.footer.rights}
         </p>
-        <Link href={localizePath(locale, "privacidad")} className="transition-colors hover:text-brand-ink">
+        <Link href={localizePath(locale, "privacidad")} className="transition-colors hover:text-cree">
           {dict.footer.privacy}
         </Link>
       </div>

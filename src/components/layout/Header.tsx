@@ -6,10 +6,11 @@ import { site } from "@/src/lib/site";
 import Button from "@/src/components/ui/Button";
 import LocaleSwitcher from "./LocaleSwitcher";
 import MobileMenu from "./MobileMenu";
+import HeaderShell from "./HeaderShell";
 
 type HeaderProps = { locale: Locale; dict: Dictionary };
 
-/** Header absoluto: flota sobre el hero y se desplaza con la página. */
+/** Header fijo: transparente arriba, se oculta al bajar y reaparece con fondo al subir (ver HeaderShell). */
 export default function Header({ locale, dict }: HeaderProps) {
   const links = [
     { href: localizePath(locale, "servicios"), label: dict.nav.services },
@@ -18,7 +19,7 @@ export default function Header({ locale, dict }: HeaderProps) {
   const contact = { href: localizePath(locale, "contacto"), label: dict.nav.contact };
 
   return (
-    <header className="absolute inset-x-0 top-0 z-50">
+    <HeaderShell>
       <div className="container-site flex h-20 items-center justify-between gap-6">
         <Link
           href={localizePath(locale)}
@@ -58,6 +59,6 @@ export default function Header({ locale, dict }: HeaderProps) {
           }}
         />
       </div>
-    </header>
+    </HeaderShell>
   );
 }

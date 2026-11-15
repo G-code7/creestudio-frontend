@@ -4,7 +4,7 @@ import { localizePath, resolveLocale } from "@/src/lib/i18n";
 import { needOptions, type NeedOption } from "@/src/lib/lead";
 import { pageMetadata } from "@/src/lib/seo";
 import PageHeader from "@/src/components/ui/PageHeader";
-import QualifyForm from "@/src/components/contact/QualifyForm";
+import QualifyForm from "@/src/components/pages/contacto/QualifyForm";
 
 type PageProps = {
   params: Promise<{ locale: string }>;

@@ -99,7 +99,13 @@ export type Dictionary = {
   };
   hero: { title: string; subtitle: string };
   home: {
-    stakes: { title: string; items: { fear: string; answer: string }[] };
+    stakes: {
+      title: string;
+      signal: string;
+      answerLabel: string;
+      outro: string;
+      items: { fear: string; answer: string }[];
+    };
     services: { title: string };
     work: { title: string; all: string };
     process: {
@@ -115,6 +121,12 @@ export type Dictionary = {
     metaDescription: string;
     title: string;
     intro: string;
+    disciplinesLabel: string;
+    perMonth: string;
+    prevService: string;
+    nextService: string;
+    /** Caja 3D de la página de Packaging. */
+    box: { open: string; close: string; hint: string };
     problemLabel: string;
     includesLabel: string;
     excludesLabel: string;
@@ -132,6 +144,7 @@ export type Dictionary = {
     servicesLabel: string;
     yearLabel: string;
     locationLabel: string;
+    prev: string;
     next: string;
   };
   contact: {

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { ComponentProps, ReactNode } from "react";
 
-type Variant = "primary" | "ghost";
+type Variant = "primary" | "ghost" | "light";
 type Size = "md" | "sm";
 
 type ButtonProps = {
@@ -18,6 +18,8 @@ export const buttonBase =
 export const buttonVariants: Record<Variant, string> = {
   primary: "bg-ink text-paper hover:bg-brand-ink",
   ghost: "border border-ink/25 text-ink hover:border-ink hover:bg-ink hover:text-paper",
+  /** Para fondos oscuros o de marca. */
+  light: "bg-paper text-ink hover:bg-ink hover:text-paper",
 };
 
 export const buttonSizes: Record<Size, string> = {
