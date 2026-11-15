@@ -99,7 +99,13 @@ export type Dictionary = {
   };
   hero: { title: string; subtitle: string };
   home: {
-    stakes: { title: string; items: { fear: string; answer: string }[] };
+    stakes: {
+      title: string;
+      signal: string;
+      answerLabel: string;
+      outro: string;
+      items: { fear: string; answer: string }[];
+    };
     services: { title: string };
     work: { title: string; all: string };
     process: {

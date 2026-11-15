@@ -1,38 +1,38 @@
-import Link from "next/link";
 import { serviceSlugs, type Locale } from "@/src/content/config";
 import type { Dictionary } from "@/src/content/types";
 import { localizePath } from "@/src/lib/i18n";
+import type { ProjectCard } from "@/src/lib/projects-wp";
+import ServicesList from "./ServicesList";
 
 type ServicesIndexProps = {
   locale: Locale;
   dict: Dictionary;
   headingLevel?: "h2" | "h3";
+  /** Proyectos del CMS: sus portadas se alternan como vista previa al pasar el cursor por cada servicio. */
+  projects?: ProjectCard[];
 };
 
-/** Índice tipográfico de servicios: el nombre es el elemento visual. */
-export default function ServicesIndex({ locale, dict, headingLevel = "h3" }: ServicesIndexProps) {
-  const Heading = headingLevel;
+const MAX_PREVIEWS = 6;
 
-  return (
-    <ul className="border-t border-ink">
-      {serviceSlugs.map((slug) => {
-        const service = dict.services.items[slug];
-        return (
-          <li key={slug} className="border-b border-line">
-            <Link
-              href={localizePath(locale, `servicios/${slug}`)}
-              className="group grid gap-3 py-8 md:grid-cols-12 md:items-end md:gap-8 md:py-10"
-            >
-              <Heading className="font-display text-4xl font-bold leading-none tracking-tight text-ink transition-[color,transform] duration-500 ease-out group-hover:translate-x-3 group-hover:text-brand sm:text-5xl md:col-span-7 md:text-7xl">
-                {service.name}
-              </Heading>
-              <p className="max-w-md font-sans text-base leading-relaxed text-slate-soft transition-colors group-hover:text-ink md:col-span-5">
-                {service.short}
-              </p>
-            </Link>
-          </li>
-        );
-      })}
-    </ul>
-  );
+/** Índice tipográfico de servicios: el nombre es el elemento visual. */
+export default function ServicesIndex({ locale, dict, headingLevel = "h3", projects = [] }: ServicesIndexProps) {
+  // Hasta 6 portadas por servicio. La primera, si se puede, distinta en cada uno.
+  const used = new Set<string>();
+  const items = serviceSlugs.map((slug) => {
+    const covers = [
+      ...new Set(projects.filter((p) => p.cover && p.services.includes(slug)).map((p) => p.cover!)),
+    ].slice(0, MAX_PREVIEWS);
+    const first = covers.findIndex((c) => !used.has(c));
+    if (first > 0) covers.unshift(...covers.splice(first, 1));
+    if (covers[0]) used.add(covers[0]);
+    return {
+      slug,
+      href: localizePath(locale, `servicios/${slug}`),
+      name: dict.services.items[slug].name,
+      short: dict.services.items[slug].short,
+      previews: covers,
+    };
+  });
+
+  return <ServicesList items={items} headingLevel={headingLevel} />;
 }

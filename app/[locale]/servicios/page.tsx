@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getDictionary } from "@/src/content";
 import { localizePath, resolveLocale } from "@/src/lib/i18n";
 import { pageMetadata } from "@/src/lib/seo";
+import { fetchProjects } from "@/src/lib/projects-wp";
 import PageHeader from "@/src/components/ui/PageHeader";
 import CtaBand from "@/src/components/ui/CtaBand";
 import ServicesIndex from "@/src/components/services/ServicesIndex";
@@ -9,6 +10,9 @@ import Packages from "@/src/components/services/Packages";
 import RetainerTiers from "@/src/components/services/RetainerTiers";
 
 type PageProps = { params: Promise<{ locale: string }> };
+
+// Las vistas previas del índice usan portadas de WordPress.
+export const revalidate = 3600;
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const locale = await resolveLocale(params);
@@ -24,6 +28,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function ServicesPage({ params }: PageProps) {
   const locale = await resolveLocale(params);
   const dict = getDictionary(locale);
+  const projects = await fetchProjects(locale);
   const labels = { investment: dict.common.investment, investmentOnCall: dict.common.investmentOnCall };
 
   return (
@@ -31,7 +36,7 @@ export default async function ServicesPage({ params }: PageProps) {
       <PageHeader title={dict.services.title} intro={dict.services.intro} />
 
       <section className="container-site pb-24 md:pb-32">
-        <ServicesIndex locale={locale} dict={dict} headingLevel="h2" />
+        <ServicesIndex locale={locale} dict={dict} headingLevel="h2" projects={projects} />
       </section>
 
       <section id="paquetes" className="container-site py-24 md:py-32">

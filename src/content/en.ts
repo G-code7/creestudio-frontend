@@ -31,6 +31,9 @@ const en: Dictionary = {
   home: {
     stakes: {
       title: "Three signs your brand is holding you back",
+      signal: "Sign",
+      answerLabel: "How we fix it",
+      outro: "Recognize yourself in any of these? Your business isn’t the problem. How it looks is.",
       items: [
         {
           fear: "“My brand looks like everyone else’s.”",

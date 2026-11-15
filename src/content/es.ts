@@ -38,6 +38,9 @@ const es: Dictionary = {
   home: {
     stakes: {
       title: "Tres señales de que tu marca te está frenando",
+      signal: "Señal",
+      answerLabel: "Cómo lo resolvemos",
+      outro: "¿Te reconociste en alguna? El problema no es tu negocio: es cómo se ve.",
       items: [
         {
           fear: "“Mi marca se ve como la de cualquiera.”",
@@ -57,7 +60,7 @@ const es: Dictionary = {
       ],
     },
     services: { title: "Lo que hacemos" },
-    work: { title: "Trabajo reciente", all: "Ver todos los proyectos" },
+    work: { title: "Trabajos recientes", all: "Ver todos los proyectos" },
     process: {
       title: "Así trabajamos",
       intro:
