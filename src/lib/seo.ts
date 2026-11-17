@@ -9,7 +9,7 @@ type PageMetaArgs = {
   path: string;
   title: string;
   description: string;
-  /** true en la home: el título no pasa por la plantilla "%s | Cree Studio". */
+  /** true en la home: el título no pasa por la plantilla "%s | Cree Estudio". */
   absoluteTitle?: boolean;
   /** Imagen al compartir el enlace. Por defecto, la de la marca en el idioma de la página. */
   image?: string;

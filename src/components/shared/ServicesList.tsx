@@ -180,17 +180,17 @@ export default function ServicesList({ items, headingLevel }: ServicesListProps)
               />
 
               <Heading className="relative z-10 font-display text-4xl font-bold leading-none tracking-tight text-ink transition-[color,transform] duration-500 ease-out group-hover:translate-x-3 group-hover:text-paper group-focus-visible:text-paper sm:text-5xl md:col-span-7 md:text-7xl">
+                <span
+                  data-index
+                  aria-hidden
+                  className="mr-3 inline-block align-top font-display text-sm font-bold tracking-[0.18em] text-brand-ink transition-colors duration-500 group-hover:text-ink md:mr-5 md:text-base"
+                >
+                  {pad(i + 1)}
+                </span>
                 <span className="inline-block overflow-hidden pb-[0.06em] align-bottom">
                   <span data-name className="inline-block">
                     {item.name}
                   </span>
-                </span>
-                <span
-                  data-index
-                  aria-hidden
-                  className="ml-2 align-top font-sans text-xs font-medium tracking-normal text-brand-ink transition-colors duration-500 group-hover:text-ink md:ml-3 md:text-sm"
-                >
-                  ({pad(i + 1)})
                 </span>
               </Heading>
 

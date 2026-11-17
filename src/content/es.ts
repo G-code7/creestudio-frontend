@@ -10,7 +10,7 @@ import type { Dictionary } from "./types";
  */
 const es: Dictionary = {
   meta: {
-    title: "Cree Studio | Estudio de branding e identidad visual",
+    title: "Cree Estudio | Estudio de branding e identidad visual",
     description:
       "Estudio creativo de branding, identidad visual, naming, packaging y diseño web. Co-creamos marcas sólidas para fundadores y empresas que quieren liderar.",
   },
@@ -32,36 +32,62 @@ const es: Dictionary = {
     investmentOnCall: "Te compartimos el rango en la primera llamada.",
   },
   hero: {
-    title: "Branding estratégico para marcas listas para liderar su industria.",
+    title: "Creamos marcas que la gente recuerda y que de verdad venden",
     subtitle:
-      "Co-creamos la identidad de fundadores y empresas: branding, identidad visual, naming, packaging y diseño web.",
+      "Un estudio creativo con cabeza de negocio. Branding, contenido, diseño web y packaging, todo lo que tu marca necesita para crecer.",
   },
   home: {
-    stakes: {
-      title: "Tres señales de que tu marca te está frenando",
-      signal: "Señal",
-      answerLabel: "Cómo lo resolvemos",
-      outro: "¿Te reconociste en alguna? El problema no es tu negocio: es cómo se ve.",
+    whyCree: {
+      eyebrow: "Por qué Cree",
+      title: "No somos solo diseño",
       items: [
         {
-          fear: "“Mi marca se ve como la de cualquiera.”",
-          answer:
-            "Construimos la estrategia antes que el logo: a quién le hablas, por qué te eligen y qué te hace distinto. La identidad sale de ahí, no de una tendencia.",
+          title: "Creatividad con cabeza de negocio",
+          text: "No diseñamos solo para que se vea bonito, sino para que te venda. Detrás de cada decisión hay una razón de negocio.",
         },
         {
-          fear: "“Invertí en un logo y nada cambió.”",
-          answer:
-            "Un logo suelto no es una marca. Entregamos un sistema completo (color, tipografía, aplicaciones y manual) para que tu marca se vea igual de sólida en cada punto de contacto.",
+          title: "Decidimos contigo, no por ti",
+          text: "Nada se define sin ti. Te involucramos desde el brief hasta la entrega, así que sabes exactamente lo que vas a recibir.",
         },
         {
-          fear: "“Mi imagen no está a la altura de lo que cobro.”",
-          answer:
-            "Si tu precio dice premium y tu imagen dice improvisado, el cliente le cree a la imagen. Alineamos cómo te ves con el valor que ya entregas.",
+          title: "Toda tu marca, en un solo estudio",
+          text: "Del branding al contenido y la web. Una sola visión que mantiene tu marca coherente, sin saltar entre proveedores.",
+        },
+        {
+          title: "Nos quedamos",
+          text: "No somos un proyecto y adiós. Nuestros clientes trabajan con nosotros por años, porque de verdad nos importa que les vaya bien.",
         },
       ],
     },
     services: { title: "Lo que hacemos" },
     work: { title: "Trabajos recientes", all: "Ver todos los proyectos" },
+    howWeWork: {
+      title: "Así trabajamos",
+      intro:
+        "Sabemos que tu tiempo vale oro. Por eso el proceso es claro y directo, desde el primer mensaje hasta que tu proyecto está en tus manos.",
+      steps: [
+        {
+          name: "Nos escribes",
+          text: "Por WhatsApp o agendas una llamada. Nos cuentas qué necesita tu marca y en qué estás.",
+        },
+        {
+          name: "Nos reunimos",
+          text: "En una llamada conocemos tu negocio y tus objetivos, y te mostramos cómo podemos ayudarte. Sin compromiso.",
+        },
+        {
+          name: "Te cotizamos",
+          text: "Una cotización hecha a tu medida, con el servicio y la inversión claros. Sin letra chica ni sorpresas.",
+        },
+        {
+          name: "Arrancamos",
+          text: "Firmamos, haces el pago inicial y empezamos a construir. Decides con nosotros en cada etapa.",
+        },
+        {
+          name: "Seguimos cerca",
+          text: "Te entregamos todo listo para usar, y quedamos a la mano para lo que tu marca necesite después.",
+        },
+      ],
+    },
     process: {
       title: "Así trabajamos",
       intro:
@@ -202,78 +228,81 @@ const es: Dictionary = {
     items: {
       branding: {
         name: "Branding",
-        short: "Estrategia, propósito y mensaje: la base de cada decisión creativa.",
-        metaTitle: "Branding estratégico para empresas",
+        short:
+          "Estrategia, naming e identidad visual. La base de tu marca: quién eres, a quién le hablas y cómo se ve. Todo lo demás nace de aquí.",
+        metaTitle: "Branding: estrategia, naming e identidad visual",
         metaDescription:
-          "Definimos el propósito, el posicionamiento y el mensaje de tu marca para que cada decisión creativa tenga un rumbo claro. Branding estratégico de Cree Studio.",
+          "Estrategia de marca, naming e identidad visual en un solo proceso. Definimos quién eres, a quién le hablas y cómo se ve tu marca. Branding de Cree Estudio.",
         problem:
           "Tengo un buen producto, pero cuando explico qué me hace distinto ni yo lo tengo claro. Cada pieza que publico parece de una marca diferente.",
         includes: [
-          "Sesiones de descubrimiento con tu equipo",
-          "Análisis de competencia y posicionamiento",
-          "Propósito, valores y personalidad de marca",
-          "Mensaje central y tono de voz",
-          "Hoja de ruta para aplicar la estrategia",
-        ],
-        excludes: [
-          "Producción de fotografía y video",
-          "Gestión diaria de redes sociales",
-          "Pauta publicitaria",
-        ],
-        outcome:
-          "Una estrategia escrita que tu equipo puede usar para decidir qué decir, cómo decirlo y qué dejar fuera.",
-        investment: null,
-      },
-      "identidad-visual": {
-        name: "Identidad visual",
-        short: "El sistema visual completo: lo que se ve, lo que se siente y lo que se recuerda.",
-        metaTitle: "Diseño de identidad visual",
-        metaDescription:
-          "Logotipo, color, tipografía y manual de marca en un sistema visual coherente. Diseñamos identidades que se reconocen y se aplican igual en todos los formatos.",
-        problem:
-          "Mi logo lo hizo alguien hace años y ya no me representa. Cada proveedor usa colores y tipografías distintas.",
-        includes: [
-          "Logotipo e isotipo con sus variantes",
-          "Paleta de color y sistema tipográfico",
-          "Elementos gráficos y estilo de imagen",
-          "Manual de marca",
-          "Aplicaciones clave: papelería, redes y señalética",
-        ],
-        excludes: [
-          "Estrategia de marca completa (disponible en Branding)",
-          "Impresión y producción física",
-          "Desarrollo web",
-        ],
-        outcome:
-          "Una identidad que se reconoce al instante y se aplica igual en una tarjeta, un empaque o una pantalla.",
-        investment: null,
-      },
-      naming: {
-        name: "Naming",
-        short: "Nombres que conectan, perduran y abren puertas.",
-        metaTitle: "Naming: creación de nombres de marca",
-        metaDescription:
-          "Creamos nombres de marca con fundamento: exploración verbal, filtro de significado en varios idiomas y revisión preliminar de dominios. Naming de Cree Studio.",
-        problem:
-          "Tengo el negocio casi listo y no encuentro un nombre que suene bien, que se pueda registrar y que tenga dominio disponible.",
-        includes: [
-          "Brief de naming y territorio verbal",
-          "Exploración de propuestas de nombre",
-          "Filtro de pronunciación y significado en los idiomas que te importan",
-          "Revisión preliminar de dominios y redes",
-          "Presentación de finalistas con su racional",
+          "Sesiones de descubrimiento y análisis de competencia",
+          "Propósito, posicionamiento, mensaje y tono de voz",
+          "Naming con finalistas y su racional, si lo necesitas",
+          "Logotipo, paleta de color y sistema tipográfico",
+          "Manual de marca y aplicaciones clave",
         ],
         excludes: [
           "Registro legal de la marca (te recomendamos asesoría especializada)",
-          "Compra de dominios",
+          "Producción de fotografía y video",
+          "Impresión y producción física",
         ],
         outcome:
-          "Un nombre con fundamento que puedes defender ante socios, inversores y clientes.",
+          "Una marca con estrategia, nombre e identidad coherentes, lista para aplicarse igual en cada punto de contacto.",
+        investment: null,
+      },
+      contenido: {
+        name: "Social Media",
+        short:
+          "Contenido que trabaja para tu negocio: video, posts y gestión que venden, no que solo llenan el feed.",
+        metaTitle: "Contenido y gestión de redes sociales",
+        metaDescription:
+          "Video, posts y gestión de redes alineados a tu marca y a tus objetivos de venta. Contenido que trabaja para tu negocio. Social media de Cree Estudio.",
+        problem:
+          "Publico porque toca, pero no sé si sirve de algo. Mis redes no se parecen a mi marca y no me traen clientes.",
+        includes: [
+          "Estrategia de contenido y líneas editoriales",
+          "Calendario mensual de publicaciones",
+          "Producción de video corto y piezas gráficas",
+          "Copys con el tono de tu marca",
+          "Gestión de perfiles y reporte de resultados",
+        ],
+        excludes: [
+          "Inversión en pauta publicitaria",
+          "Atención a mensajes directos de clientes",
+          "Producciones audiovisuales de gran formato",
+        ],
+        outcome:
+          "Redes que se ven como tu marca y que generan conversaciones con clientes reales, no solo likes.",
+        investment: null,
+      },
+      "diseno-web": {
+        name: "Diseño Web",
+        short: "Sitios y tiendas que traducen tu marca en una experiencia digital que vende.",
+        metaTitle: "Diseño web y tiendas online para marcas",
+        metaDescription:
+          "Sitios web y tiendas online a medida, rápidos y alineados a tu identidad, con un panel para editar contenido sin depender de nadie. Diseño web de Cree Estudio.",
+        problem:
+          "Mi web no refleja el nivel de mi marca. Carga lento, se ve genérica y casi nadie nos contacta ni compra desde ahí.",
+        includes: [
+          "Arquitectura de contenido y recorrido del usuario",
+          "Diseño de interfaz alineado a tu identidad",
+          "Desarrollo a medida o tienda online, rápido y adaptado a móvil",
+          "Panel para editar contenido sin depender de nadie",
+          "SEO técnico de base y analítica",
+        ],
+        excludes: [
+          "Redacción de todos los textos",
+          "Fotografía y video",
+          "Mantenimiento mensual (disponible en los planes de continuidad)",
+        ],
+        outcome:
+          "Un sitio que carga rápido, se ve a la altura de tu marca y convierte visitas en conversaciones y ventas.",
         investment: null,
       },
       packaging: {
         name: "Packaging",
-        short: "Empaques que convierten recibir tu producto en una experiencia.",
+        short: "Empaques que hacen de abrir tu producto una experiencia.",
         metaTitle: "Diseño de packaging",
         metaDescription:
           "Diseño de empaques y etiquetas con artes finales listos para imprenta. Packaging que se reconoce en el anaquel y se fotografía bien en redes.",
@@ -295,28 +324,29 @@ const es: Dictionary = {
           "Un empaque que se reconoce, se fotografía bien y hace que el cliente quiera volver a comprar.",
         investment: null,
       },
-      "diseno-web": {
-        name: "Diseño web",
-        short: "Sitios que traducen tu esencia en una experiencia digital que convierte.",
-        metaTitle: "Diseño web para marcas",
+      eventos: {
+        name: "Eventos",
+        short:
+          "Lanzamientos, pop-ups y activaciones. Tu marca hecha experiencia, para que la gente no solo la vea: la viva.",
+        metaTitle: "Eventos y activaciones de marca",
         metaDescription:
-          "Sitios web a medida, rápidos y alineados a tu identidad, con un panel para editar contenido sin depender de nadie. Diseño y desarrollo web de Cree Studio.",
+          "Lanzamientos, pop-ups y activaciones diseñados desde tu marca. Experiencias que la gente vive y recuerda. Eventos para marcas de Cree Estudio.",
         problem:
-          "Mi web no refleja el nivel de mi marca. Carga lento, se ve genérica y casi nadie nos contacta desde ahí.",
+          "Voy a lanzar algo importante y no quiero un evento genérico: quiero que la gente salga hablando de mi marca.",
         includes: [
-          "Arquitectura de contenido y recorrido del usuario",
-          "Diseño de interfaz alineado a tu identidad",
-          "Desarrollo a medida, rápido y adaptado a móvil",
-          "Panel para editar contenido sin depender de nadie",
-          "SEO técnico de base y analítica",
+          "Concepto creativo de la experiencia",
+          "Diseño del espacio, señalética y piezas gráficas",
+          "Coordinación de proveedores y producción",
+          "Contenido del evento para redes",
+          "Acompañamiento el día del evento",
         ],
         excludes: [
-          "Redacción de todos los textos",
-          "Fotografía y video",
-          "Mantenimiento mensual (disponible en los planes de continuidad)",
+          "Alquiler del espacio y costos de producción",
+          "Catering y logística de invitados",
+          "Permisos y trámites locales",
         ],
         outcome:
-          "Un sitio que carga rápido, se ve a la altura de tu marca y convierte visitas en conversaciones.",
+          "Un evento que se siente 100% tu marca y que deja contenido, contactos y conversación después del día.",
         investment: null,
       },
     },
@@ -324,7 +354,7 @@ const es: Dictionary = {
   work: {
     metaTitle: "Proyectos de branding e identidad visual",
     metaDescription:
-      "Casos de branding, identidad visual y packaging para marcas en Estados Unidos, España y Latinoamérica. Conoce el trabajo de Cree Studio.",
+      "Casos de branding, identidad visual y packaging para marcas en Estados Unidos, España y Latinoamérica. Conoce el trabajo de Cree Estudio.",
     title: "Proyectos",
     intro:
       "Marcas que construimos junto a sus fundadores, de la estrategia al último detalle.",
@@ -353,10 +383,10 @@ const es: Dictionary = {
         needsLabel: "¿Qué necesitas? Puedes elegir varias opciones.",
         needs: {
           branding: "Branding",
-          "identidad-visual": "Identidad visual",
-          naming: "Naming",
-          packaging: "Packaging",
+          contenido: "Contenido y redes sociales",
           "diseno-web": "Diseño web",
+          packaging: "Packaging",
+          eventos: "Eventos para marcas",
           otro: "Otro",
         },
       },
@@ -431,14 +461,14 @@ const es: Dictionary = {
   privacy: {
     metaTitle: "Política de privacidad",
     metaDescription:
-      "Cómo trata Cree Studio los datos que envías a través del formulario de contacto.",
+      "Cómo trata Cree Estudio los datos que envías a través del formulario de contacto.",
     title: "Política de privacidad",
     updated: "Última actualización: octubre de 2026",
     sections: [
       {
         title: "Responsable",
         body: [
-          "Cree Studio es responsable del tratamiento de los datos que nos envías a través de este sitio.",
+          "Cree Estudio es responsable del tratamiento de los datos que nos envías a través de este sitio.",
         ],
       },
       {
@@ -494,7 +524,7 @@ const es: Dictionary = {
   blog: {
     metaTitle: "Blog de branding y diseño",
     metaDescription:
-      "Ideas sobre branding, identidad visual, naming, packaging y diseño web para marcas que quieren crecer. El blog de Cree Studio.",
+      "Ideas sobre branding, identidad visual, naming, packaging y diseño web para marcas que quieren crecer. El blog de Cree Estudio.",
     title: "Blog",
     intro: "Lo que aprendemos construyendo marcas: estrategia, diseño y negocio, sin relleno.",
     all: "Todo",

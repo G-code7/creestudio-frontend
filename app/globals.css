@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /* ──────────────────────────────────────────────────────────────
-   Design tokens de Cree Studio (paleta y tipografías del sitio actual).
+   Design tokens de Cree Estudio (paleta y tipografías del sitio actual).
    Tailwind v4 genera las utilidades: text-ink, bg-mist, font-display…
    ────────────────────────────────────────────────────────────── */
 @theme {

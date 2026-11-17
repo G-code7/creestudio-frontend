@@ -14,20 +14,13 @@ type StakesProps = {
   cta: { label: string; href: string };
 };
 
-/** Quita las comillas del texto: se dibujan aparte, grandes, como parte del diseño. */
 const stripQuotes = (text: string) => text.replace(/^[\s“"«]+|[\s”"»]+$/g, "");
 
 const pad = (n: number) => String(n).padStart(2, "0");
 const DIM = "rgba(17,17,17,0.16)";
 const INK = "#111111";
 
-/*
- * "Tres señales", en blanco para separarse del hero lavanda.
- *   - Izquierda (fija en escritorio): título e índice 01·02·03 que marca la señal en pantalla.
- *   - Derecha: las señales. Cada frase se enciende palabra por palabra al pasar
- *     y luego entra la tarjeta con la respuesta.
- *   - Movimiento reducido o sin JS: todo visible y estático (el índice sigue marcando).
- */
+
 export default function Stakes({ title, signal, answerLabel, outro, items, cta }: StakesProps) {
   const root = useRef<HTMLElement>(null);
 
@@ -39,7 +32,6 @@ export default function Stakes({ title, signal, answerLabel, outro, items, cta }
       const slides = q<HTMLElement>("[data-slide]");
       const marks = q<HTMLElement>("[data-index-item]");
 
-      // Índice activo: la señal que cruza el centro de la pantalla.
       slides.forEach((slide, i) => {
         ScrollTrigger.create({
           trigger: slide,
@@ -52,7 +44,6 @@ export default function Stakes({ title, signal, answerLabel, outro, items, cta }
       });
 
       gsap.matchMedia().add("(prefers-reduced-motion: no-preference)", () => {
-        // Título y cierre: palabras que suben desde una máscara.
         for (const block of q<HTMLElement>("[data-rise]")) {
           gsap.from(block.querySelectorAll("[data-word] > span"), {
             yPercent: 110,
@@ -93,7 +84,6 @@ export default function Stakes({ title, signal, answerLabel, outro, items, cta }
   return (
     <section ref={root} className="bg-paper text-ink">
       <div className="container-site grid gap-12 py-24 md:grid-cols-12 md:gap-8 md:py-36">
-        {/* Columna izquierda: título + índice, fija mientras pasan las señales */}
         <div className="md:col-span-5">
           <div className="md:sticky md:top-32">
             <h2
@@ -110,10 +100,10 @@ export default function Stakes({ title, signal, answerLabel, outro, items, cta }
                     href={`#senal-${i + 1}`}
                     tabIndex={-1}
                     data-index-item
-                    className="group/idx flex items-center gap-4 font-sans text-sm font-semibold tracking-[0.18em] text-ink/30 transition-colors duration-500 hover:text-ink/60 data-[active]:text-ink"
+                    className="group/idx flex items-center gap-4 font-sans text-sm font-semibold tracking-[0.18em] text-ink/30 transition-colors duration-500 hover:text-ink/60 data-active:text-ink"
                   >
                     <span>{pad(i + 1)}</span>
-                    <span className="h-[2px] w-6 rounded-full bg-current transition-[width,background-color] duration-500 group-data-[active]/idx:w-16 group-data-[active]/idx:bg-cree" />
+                    <span className="h-0.5px w-6 rounded-full bg-current transition-[width,background-color] duration-500 group-data-active/idx:w-16 group-data-active/idx:bg-cree" />
                   </a>
                 </li>
               ))}
@@ -139,7 +129,7 @@ export default function Stakes({ title, signal, answerLabel, outro, items, cta }
                   <span
                     data-mark
                     aria-hidden
-                    className="pointer-events-none absolute -top-[0.42em] -left-[0.04em] font-display text-[6rem] leading-none font-bold text-cree select-none md:text-[8rem]"
+                    className="pointer-events-none absolute -top[-0.42em] -left[-0.04em] font-display text-[6rem] leading-none font-bold text-cree select-none md:text-[8rem]"
                   >
                     “
                   </span>

@@ -5,10 +5,9 @@ import { localizePath, resolveLocale } from "@/src/lib/i18n";
 import { pageMetadata } from "@/src/lib/seo";
 import { fetchProjects } from "@/src/lib/projects-wp";
 import Hero from "@/src/components/home/Hero";
-import Stakes from "@/src/components/home/Stakes";
-import Process from "@/src/components/home/Process";
+import WhyCree from "@/src/components/home/WhyCree";
+import HowWeWork from "@/src/components/home/HowWeWork";
 import AfterLaunch from "@/src/components/home/AfterLaunch";
-import ProcessPath from "@/src/components/home/ProcessPath";
 import ServicesIndex from "@/src/components/shared/ServicesIndex";
 import FeaturedProjectsSection from "@/src/components/home/FeaturedProjectsSection";
 import CtaBand from "@/src/components/ui/CtaBand";
@@ -50,13 +49,10 @@ export default async function HomePage({ params }: PageProps) {
         projects={heroProjects}
       />
 
-      <Stakes
-        title={dict.home.stakes.title}
-        signal={dict.home.stakes.signal}
-        answerLabel={dict.home.stakes.answerLabel}
-        outro={dict.home.stakes.outro}
-        items={dict.home.stakes.items}
-        cta={{ label: dict.common.bookCall, href: contactHref }}
+      <WhyCree
+        eyebrow={dict.home.whyCree.eyebrow}
+        title={dict.home.whyCree.title}
+        items={dict.home.whyCree.items}
       />
 
       <section className="container-site py-24 md:py-32">
@@ -69,20 +65,18 @@ export default async function HomePage({ params }: PageProps) {
 
       <FeaturedProjectsSection projects={featured} locale={locale} dict={dict} />
 
-      {/* Una línea une los pasos del proceso y termina en el CTA de continuidad */}
-      <ProcessPath>
-        <Process
-          title={dict.home.process.title}
-          intro={dict.home.process.intro}
-          steps={dict.home.process.steps}
-        />
+      {/* Process + ProcessPath (la línea curva) quedan guardados para las landings de servicios */}
+      <HowWeWork
+        title={dict.home.howWeWork.title}
+        intro={dict.home.howWeWork.intro}
+        steps={dict.home.howWeWork.steps}
+      />
 
-        <AfterLaunch
-          title={dict.home.afterLaunch.title}
-          text={dict.home.afterLaunch.text}
-          link={{ label: dict.home.afterLaunch.link, href: `${localizePath(locale, "servicios")}#continuidad` }}
-        />
-      </ProcessPath>
+      {/* <AfterLaunch
+        title={dict.home.afterLaunch.title}
+        text={dict.home.afterLaunch.text}
+        link={{ label: dict.home.afterLaunch.link, href: `${localizePath(locale, "servicios")}#continuidad` }}
+      /> */}
 
       <CtaBand
         title={dict.home.cta.title}
@@ -91,4 +85,4 @@ export default async function HomePage({ params }: PageProps) {
       />
     </>
   );
-}
+}

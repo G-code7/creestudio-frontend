@@ -14,12 +14,18 @@ import WebInterface from "./firmas/WebInterface";
 
 type SignatureProps = { accent: string; labels?: { open: string; close: string; hint: string } };
 
+/** Contenido reutiliza los rodillos, con palabras del feed en vez de nombres. */
+const FEED_WORDS = ["POST", "REEL", "FEED", "LIVE"];
+function ContentReels({ accent }: SignatureProps) {
+  return <NamingReels accent={accent} names={FEED_WORDS} />;
+}
+
 const SIGNATURES: Record<ServiceSlug, (p: SignatureProps) => React.JSX.Element> = {
   branding: BrandingCore,
-  "identidad-visual": IdentitySystem,
-  naming: NamingReels,
-  packaging: PackagingDieline,
+  contenido: ContentReels,
   "diseno-web": WebInterface,
+  packaging: PackagingDieline,
+  eventos: IdentitySystem,
 };
 
 type ServiceHeroProps = {
@@ -39,13 +45,13 @@ const GLYPHS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 /*
  * Cabecera del detalle de servicio: un panel con el color propio del servicio
  * y su firma animada a la derecha. Igual en estructura para los cinco, distinto
- * en carácter. En Naming el título, además, se "baraja" antes de asentarse.
+ * en carácter. En Contenido el título, además, se "baraja" antes de asentarse.
  */
 export default function ServiceHero({ slug, name, short, index, total, back, boxLabels }: ServiceHeroProps) {
   const root = useRef<HTMLElement>(null);
   const theme = serviceThemes[slug];
   const Signature = SIGNATURES[slug];
-  const scramble = slug === "naming";
+  const scramble = slug === "contenido";
 
   useGSAP(
     () => {
@@ -100,7 +106,7 @@ export default function ServiceHero({ slug, name, short, index, total, back, box
         data-panel
         className={`relative overflow-hidden rounded-[2rem] ${theme.panel}`}
         style={
-          slug === "identidad-visual"
+          slug === "eventos"
             ? {
                 // Retícula de construcción de fondo
                 backgroundImage:

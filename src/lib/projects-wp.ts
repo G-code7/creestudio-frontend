@@ -1,6 +1,6 @@
 import { wpClient } from "./wordpress";
 import { galleryRefs, isSameFile, type GalleryImage } from "./gallery";
-import type { Locale, ServiceSlug } from "@/src/content/config";
+import { toServiceSlugs, type Locale, type ServiceSlug } from "@/src/content/config";
 
 /** ES por defecto; EN con fallback al ES si la traducción viene vacía. */
 function byLocale(es: string | null | undefined, en: string | null | undefined, locale: Locale): string {
@@ -48,7 +48,7 @@ export async function fetchProjects(locale: Locale): Promise<ProjectCard[]> {
     return data.proyectos.nodes.map((p) => ({
       slug: p.slug,
       title: byLocale(p.title, p.datosDelProyecto?.tituloEn, locale) || p.title,
-      services: p.servicios.nodes.map((n) => n.slug as ServiceSlug),
+      services: toServiceSlugs(p.servicios.nodes.map((n) => n.slug)),
       year: p.datosDelProyecto?.anio ?? undefined,
       cover: p.featuredImage?.node.sourceUrl,
       featured: Boolean(p.datosDelProyecto?.destacado),
@@ -198,7 +198,7 @@ export async function fetchProjectBySlug(slug: string, locale: Locale): Promise<
   return {
     slug: p.slug,
     title,
-    services: p.servicios.nodes.map((n) => n.slug as ServiceSlug),
+    services: toServiceSlugs(p.servicios.nodes.map((n) => n.slug)),
     year: acf?.anio ?? undefined,
     cover: node
       ? {

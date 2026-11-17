@@ -3,7 +3,7 @@ import type { Dictionary } from "./types";
 /* English copy. Same review notes as es.ts (investment ranges, privacy). */
 const en: Dictionary = {
   meta: {
-    title: "Cree Studio | Branding and visual identity studio",
+    title: "Cree Estudio | Branding and visual identity studio",
     description:
       "Creative studio for branding, visual identity, naming, packaging and web design. We co-create strong brands with founders and companies ready to lead.",
   },
@@ -30,31 +30,57 @@ const en: Dictionary = {
       "We co-create identities with founders and companies: branding, visual identity, naming, packaging and web design.",
   },
   home: {
-    stakes: {
-      title: "Three signs your brand is holding you back",
-      signal: "Sign",
-      answerLabel: "How we fix it",
-      outro: "Recognize yourself in any of these? Your business isn’t the problem. How it looks is.",
+    whyCree: {
+      eyebrow: "Why Cree",
+      title: "We’re not just design.",
       items: [
         {
-          fear: "“My brand looks like everyone else’s.”",
-          answer:
-            "We build the strategy before the logo: who you speak to, why they choose you and what sets you apart. The identity comes from there, not from a trend.",
+          title: "Creative with a business mind",
+          text: "We don’t design just to look good, but to make you sell. Behind every decision there’s a business reason.",
         },
         {
-          fear: "“I paid for a logo and nothing changed.”",
-          answer:
-            "A logo on its own is not a brand. We deliver a complete system (color, type, applications and guidelines) so your brand looks just as solid at every touchpoint.",
+          title: "We decide with you, not for you",
+          text: "Nothing gets defined without you. We involve you from the brief to the handover, so you know exactly what you’ll get.",
         },
         {
-          fear: "“My image doesn’t match what I charge.”",
-          answer:
-            "When your price says premium and your image says improvised, clients believe the image. We align how you look with the value you already deliver.",
+          title: "Your whole brand, in one studio",
+          text: "From branding to content and web. One vision that keeps your brand consistent, with no jumping between vendors.",
+        },
+        {
+          title: "We stay",
+          text: "We’re not a one-off project. Our clients work with us for years, because we genuinely care about how they do.",
         },
       ],
     },
     services: { title: "What we do" },
     work: { title: "Recent work", all: "See all projects" },
+    howWeWork: {
+      title: "How we work",
+      intro:
+        "We know your time is valuable. That’s why the process is clear and direct, from your first message until your project is in your hands.",
+      steps: [
+        {
+          name: "You reach out",
+          text: "On WhatsApp or by booking a call. Tell us what your brand needs and where you are right now.",
+        },
+        {
+          name: "We meet",
+          text: "On a call we get to know your business and your goals, and show you how we can help. No strings attached.",
+        },
+        {
+          name: "We send your proposal",
+          text: "A quote made to measure, with the service and the investment spelled out. No fine print, no surprises.",
+        },
+        {
+          name: "We start together",
+          text: "We sign, you make the first payment and we start building. You decide with us at every stage.",
+        },
+        {
+          name: "We deliver and stay close",
+          text: "We hand everything over ready to use, and stay within reach for whatever your brand needs next.",
+        },
+      ],
+    },
     process: {
       title: "How we work",
       intro:
@@ -195,78 +221,81 @@ const en: Dictionary = {
     items: {
       branding: {
         name: "Branding",
-        short: "Strategy, purpose and message: the foundation of every creative decision.",
-        metaTitle: "Strategic branding for companies",
+        short:
+          "Strategy, naming and visual identity. The foundation of your brand: who you are, who you speak to and how you look. Everything else grows from here.",
+        metaTitle: "Branding: strategy, naming and visual identity",
         metaDescription:
-          "We define your brand’s purpose, positioning and message so every creative decision has a clear direction. Strategic branding by Cree Studio.",
+          "Brand strategy, naming and visual identity in one process. We define who you are, who you speak to and how your brand looks. Branding by Cree Estudio.",
         problem:
           "I have a good product, but when I explain what makes it different, even I am not sure. Everything I publish looks like it comes from a different brand.",
         includes: [
-          "Discovery sessions with your team",
-          "Competitive and positioning analysis",
-          "Brand purpose, values and personality",
-          "Core message and tone of voice",
-          "Roadmap to put the strategy to work",
-        ],
-        excludes: [
-          "Photo and video production",
-          "Day-to-day social media management",
-          "Paid advertising",
-        ],
-        outcome:
-          "A written strategy your team can use to decide what to say, how to say it and what to leave out.",
-        investment: null,
-      },
-      "identidad-visual": {
-        name: "Visual identity",
-        short: "The complete visual system: what people see, feel and remember.",
-        metaTitle: "Visual identity design",
-        metaDescription:
-          "Logotype, color, typography and brand guidelines in one coherent visual system. We design identities that are recognized instantly and work in every format.",
-        problem:
-          "Someone made my logo years ago and it no longer represents us. Every supplier uses different colors and fonts.",
-        includes: [
-          "Logotype and symbol with variations",
-          "Color palette and type system",
-          "Graphic elements and image style",
-          "Brand guidelines",
-          "Key applications: stationery, social and signage",
-        ],
-        excludes: [
-          "Full brand strategy (available in Branding)",
-          "Printing and physical production",
-          "Web development",
-        ],
-        outcome:
-          "An identity people recognize instantly, applied the same way on a card, a package or a screen.",
-        investment: null,
-      },
-      naming: {
-        name: "Naming",
-        short: "Names that connect, last and open doors.",
-        metaTitle: "Naming: brand name creation",
-        metaDescription:
-          "We create well-founded brand names: verbal exploration, meaning checks across languages and a preliminary domain review. Naming by Cree Studio.",
-        problem:
-          "My business is almost ready and I can’t find a name that sounds right, can be registered and has an available domain.",
-        includes: [
-          "Naming brief and verbal territory",
-          "Name exploration",
-          "Pronunciation and meaning checks in the languages you care about",
-          "Preliminary domain and social handle review",
-          "Shortlist presentation with rationale",
+          "Discovery sessions and competitive analysis",
+          "Purpose, positioning, message and tone of voice",
+          "Naming with a shortlist and rationale, if you need it",
+          "Logotype, color palette and type system",
+          "Brand guidelines and key applications",
         ],
         excludes: [
           "Legal trademark registration (we recommend specialized counsel)",
-          "Domain purchases",
+          "Photo and video production",
+          "Printing and physical production",
         ],
         outcome:
-          "A well-founded name you can defend in front of partners, investors and clients.",
+          "A brand with a consistent strategy, name and identity, ready to be applied the same way at every touchpoint.",
+        investment: null,
+      },
+      contenido: {
+        name: "Content & Social Media",
+        short:
+          "Content that works for your business: video, posts and management that sell, not just fill the feed.",
+        metaTitle: "Content and social media management",
+        metaDescription:
+          "Video, posts and social media management aligned with your brand and your sales goals. Content that works for your business. Social media by Cree Estudio.",
+        problem:
+          "I post because I have to, but I don’t know if it does anything. My social media doesn’t look like my brand and doesn’t bring in clients.",
+        includes: [
+          "Content strategy and editorial pillars",
+          "Monthly posting calendar",
+          "Short-form video and graphic production",
+          "Copy in your brand’s voice",
+          "Profile management and performance reports",
+        ],
+        excludes: [
+          "Paid ad spend",
+          "Handling customer direct messages",
+          "Large-scale video productions",
+        ],
+        outcome:
+          "Social media that looks like your brand and starts conversations with real clients, not just likes.",
+        investment: null,
+      },
+      "diseno-web": {
+        name: "Web Design",
+        short: "Websites and online stores that translate your brand into a digital experience that sells.",
+        metaTitle: "Web design and online stores for brands",
+        metaDescription:
+          "Custom websites and online stores that load fast and match your identity, with a dashboard to edit content on your own. Web design by Cree Estudio.",
+        problem:
+          "My website doesn’t reflect the level of my brand. It loads slowly, looks generic and almost nobody contacts us or buys through it.",
+        includes: [
+          "Content architecture and user journey",
+          "Interface design aligned with your identity",
+          "Custom development or online store, fast and mobile-ready",
+          "A dashboard to edit content without depending on anyone",
+          "Technical SEO foundations and analytics",
+        ],
+        excludes: [
+          "Writing all the copy",
+          "Photography and video",
+          "Monthly maintenance (available in continuity plans)",
+        ],
+        outcome:
+          "A site that loads fast, looks as good as your brand and turns visits into conversations and sales.",
         investment: null,
       },
       packaging: {
         name: "Packaging",
-        short: "Packaging that turns receiving your product into an experience.",
+        short: "Packaging that makes opening your product an experience.",
         metaTitle: "Packaging design",
         metaDescription:
           "Packaging and label design with print-ready artwork. Packaging people recognize on the shelf and that photographs well on social media.",
@@ -288,28 +317,29 @@ const en: Dictionary = {
           "Packaging people recognize, that photographs well and makes customers want to buy again.",
         investment: null,
       },
-      "diseno-web": {
-        name: "Web design",
-        short: "Websites that translate your essence into a digital experience that converts.",
-        metaTitle: "Web design for brands",
+      eventos: {
+        name: "Brand events",
+        short:
+          "Launches, pop-ups and activations. Your brand turned into an experience, so people don’t just see it: they live it.",
+        metaTitle: "Brand events and activations",
         metaDescription:
-          "Custom websites that load fast and match your identity, with a dashboard to edit content on your own. Web design and development by Cree Studio.",
+          "Launches, pop-ups and activations designed from your brand. Experiences people live and remember. Brand events by Cree Estudio.",
         problem:
-          "My website doesn’t reflect the level of my brand. It loads slowly, looks generic and almost nobody contacts us through it.",
+          "I’m about to launch something important and I don’t want a generic event: I want people to leave talking about my brand.",
         includes: [
-          "Content architecture and user journey",
-          "Interface design aligned with your identity",
-          "Custom development, fast and mobile-ready",
-          "A dashboard to edit content without depending on anyone",
-          "Technical SEO foundations and analytics",
+          "Creative concept for the experience",
+          "Space design, signage and graphic pieces",
+          "Supplier coordination and production",
+          "Event content for social media",
+          "On-site support on the day",
         ],
         excludes: [
-          "Writing all the copy",
-          "Photography and video",
-          "Monthly maintenance (available in continuity plans)",
+          "Venue rental and production costs",
+          "Catering and guest logistics",
+          "Local permits and paperwork",
         ],
         outcome:
-          "A site that loads fast, looks as good as your brand and turns visits into conversations.",
+          "An event that feels 100% like your brand and leaves content, contacts and conversation after the day.",
         investment: null,
       },
     },
@@ -317,7 +347,7 @@ const en: Dictionary = {
   work: {
     metaTitle: "Branding and visual identity projects",
     metaDescription:
-      "Branding, visual identity and packaging work for brands in the United States, Spain and Latin America. See the work of Cree Studio.",
+      "Branding, visual identity and packaging work for brands in the United States, Spain and Latin America. See the work of Cree Estudio.",
     title: "Work",
     intro: "Brands we built alongside their founders, from strategy to the last detail.",
     servicesLabel: "Services",
@@ -345,10 +375,10 @@ const en: Dictionary = {
         needsLabel: "What do you need? You can choose more than one.",
         needs: {
           branding: "Branding",
-          "identidad-visual": "Visual identity",
-          naming: "Naming",
-          packaging: "Packaging",
+          contenido: "Content and social media",
           "diseno-web": "Web design",
+          packaging: "Packaging",
+          eventos: "Brand events",
           otro: "Something else",
         },
       },
@@ -421,14 +451,14 @@ const en: Dictionary = {
   privacy: {
     metaTitle: "Privacy policy",
     metaDescription:
-      "How Cree Studio handles the data you send through the contact form.",
+      "How Cree Estudio handles the data you send through the contact form.",
     title: "Privacy policy",
     updated: "Last updated: October 2026",
     sections: [
       {
         title: "Controller",
         body: [
-          "Cree Studio is responsible for the data you send us through this website.",
+          "Cree Estudio is responsible for the data you send us through this website.",
         ],
       },
       {
@@ -484,7 +514,7 @@ const en: Dictionary = {
   blog: {
     metaTitle: "Branding and design blog",
     metaDescription:
-      "Ideas on branding, visual identity, naming, packaging and web design for brands that want to grow. The Cree Studio blog.",
+      "Ideas on branding, visual identity, naming, packaging and web design for brands that want to grow. The Cree Estudio blog.",
     title: "Blog",
     intro: "What we learn building brands: strategy, design and business, no filler.",
     all: "All",

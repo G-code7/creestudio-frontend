@@ -26,7 +26,7 @@ export const projects: Project[] = [
     title: "Ladies Cup",
     year: 2025,
     location: "Brooklyn, NY",
-    services: ["identidad-visual", "branding"],
+    services: ["branding"],
     summary: {
       es: "Identidad visual para un torneo de golf femenino en Brooklyn, con un lenguaje sofisticado a la altura del juego.",
       en: "Visual identity for a women’s golf tournament in Brooklyn, with a refined language that matches the game.",
@@ -55,7 +55,7 @@ export const projects: Project[] = [
     title: "Panca",
     year: 2025,
     location: "Brooklyn, NY",
-    services: ["branding", "identidad-visual"],
+    services: ["branding"],
     summary: {
       es: "Branding estratégico para una propuesta gastronómica de fusión peruano-mediterránea.",
       en: "Strategic branding for a Peruvian-Mediterranean fusion restaurant concept.",
@@ -69,7 +69,7 @@ export const projects: Project[] = [
     slug: "ventu-branding",
     title: "VENTU",
     year: 2026,
-    services: ["branding", "identidad-visual"],
+    services: ["branding"],
     summary: {
       es: "Branding para una plataforma que digitaliza el turismo en Venezuela.",
       en: "Branding for a platform bringing Venezuelan tourism online.",
@@ -81,21 +81,21 @@ export const projects: Project[] = [
   {
     slug: "l-a-sistemas-produccion-20-aniversario",
     title: "L.A. Sistemas",
-    services: ["identidad-visual"],
+    services: ["branding"],
     summary: {
       es: "Identidad visual para la celebración de los 20 años de la compañía.",
       en: "Visual identity for the company’s 20th anniversary.",
     },
-    cover: "https://api.creestudio.es/wp-content/uploads/2026/10/BP2_Mesa-de-trabajo-1-copia-18-1.jpg",
+    cover: "https://api.creestudio.es/wp-content/uploads/2026/10/1-scaled-1.jpg",
     type: "standard",
     featured: true,
   },
   {
     slug: "delta-suply",
     title: "Delta Supply",
-    services: ["identidad-visual"],
+    services: ["branding"],
     summary: null,
-    cover: "https://api.creestudio.es/wp-content/uploads/2026/10/PORTAFOLIO-TUTAXI-2026-07-1-1.jpg",
+    cover: "https://api.creestudio.es/wp-content/uploads/2026/11/TUTAXI-MALETA-08.jpg",
     type: "standard",
   },
   {
