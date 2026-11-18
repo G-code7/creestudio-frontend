@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { getDictionary } from "@/src/content";
-import { localizePath, resolveLocale } from "@/src/lib/i18n";
-import { needOptions, type NeedOption } from "@/src/lib/lead";
+import { toServiceSlugs } from "@/src/content/config";
+import { resolveLocale } from "@/src/lib/i18n";
 import { pageMetadata } from "@/src/lib/seo";
+import { site, whatsappHref } from "@/src/lib/site";
 import PageHeader from "@/src/components/ui/PageHeader";
-import QualifyForm from "@/src/components/pages/contacto/QualifyForm";
+import ContactOptions from "@/src/components/pages/contacto/ContactOptions";
 
 type PageProps = {
   params: Promise<{ locale: string }>;
@@ -22,29 +23,21 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   });
 }
 
-function toNeed(value: string | string[] | undefined): NeedOption | undefined {
-  const v = Array.isArray(value) ? value[0] : value;
-  return v && (needOptions as readonly string[]).includes(v) ? (v as NeedOption) : undefined;
-}
-
 export default async function ContactPage({ params, searchParams }: PageProps) {
   const locale = await resolveLocale(params);
   const dict = getDictionary(locale);
   const { servicio } = await searchParams;
 
+  // Si llegan desde un servicio (?servicio=branding), el mensaje de WhatsApp ya lo menciona.
+  const [slug] = toServiceSlugs([Array.isArray(servicio) ? servicio[0] : (servicio ?? "")]);
+  const message = slug
+    ? dict.contact.whatsapp.messageService.replace("{service}", dict.services.items[slug].name)
+    : dict.contact.whatsapp.message;
+
   return (
     <>
       <PageHeader title={dict.contact.title} intro={dict.contact.intro} />
-      <section className="container-site pb-28 md:pb-40">
-        <div className="border-t border-ink pt-12 md:pt-16">
-          <QualifyForm
-            copy={dict.contact.form}
-            locale={locale}
-            privacyHref={localizePath(locale, "privacidad")}
-            preselect={toNeed(servicio)}
-          />
-        </div>
-      </section>
+      <ContactOptions copy={dict.contact} bookingHref={site.booking} whatsappHref={whatsappHref(message)} />
     </>
   );
 }

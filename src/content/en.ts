@@ -357,12 +357,36 @@ const en: Dictionary = {
     next: "Next project",
   },
   contact: {
-    metaTitle: "Tell us about your project",
+    metaTitle: "Let’s talk about your brand",
     metaDescription:
-      "Answer a 3-minute questionnaire about your brand and we will get back to you within one business day to schedule a discovery call.",
-    title: "Tell us about your project",
+      "Book a 20-minute call with CREE or message us on WhatsApp. We come prepared and send you a tailored proposal within 24 hours.",
+    title: "Let’s talk about your brand",
     intro:
-      "Before we talk budget, we want to understand your business. The questionnaire takes about 3 minutes and helps us prepare a proposal that fits. If we are a good match, we reply within one business day with a link to book the call.",
+      "Before we talk budget, we want to understand your business. Choose how you’d like to start: book a call or message us directly.",
+    call: {
+      eyebrow: "Recommended",
+      title: "Book a call",
+      meta: "20 minutes",
+      text: "Answer a few quick questions (it takes 2 minutes) and we come to the call prepared, with a proposal designed for you.",
+      asks: ["Your brand", "What you need", "Your budget", "Your WhatsApp"],
+      cta: "Pick a day and time",
+    },
+    whatsapp: {
+      title: "Message us on WhatsApp",
+      text: "Prefer to write? Tell us what your brand needs and we’ll reply during business hours.",
+      cta: "Open WhatsApp",
+      message: "Hi CREE, I’d like to talk about my brand.",
+      messageService: "Hi CREE, I’m interested in {service} for my brand.",
+    },
+    next: {
+      title: "What happens next",
+      steps: [
+        { name: "You book or write", text: "Through the call or on WhatsApp, whichever suits you." },
+        { name: "We review your answers", text: "We come to the conversation knowing what you need." },
+        { name: "We talk", text: "A direct call, no detours and no strings attached." },
+        { name: "Your proposal in 24 h", text: "A tailored quote with everything spelled out. No fine print." },
+      ],
+    },
     form: {
       stepOf: "Step {current} of {total}",
       next: "Continue",

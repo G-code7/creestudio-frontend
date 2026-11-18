@@ -34,7 +34,8 @@ export default function Footer({ locale, dict }: FooterProps) {
           <ul className="mt-4 flex flex-col gap-2.5">
             {serviceSlugs.map((slug) => (
               <li key={slug}>
-                <Link href={localizePath(locale, `servicios/${slug}`)} className={linkClass}>
+                {/* <Link href={localizePath(locale, `servicios/${slug}`)} className={linkClass}> */}
+                <Link href={localizePath(locale, `servicios/`)} className={linkClass}>
                   {dict.services.items[slug].name}
                 </Link>
               </li>

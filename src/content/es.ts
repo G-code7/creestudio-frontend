@@ -365,12 +365,36 @@ const es: Dictionary = {
     next: "Siguiente proyecto",
   },
   contact: {
-    metaTitle: "Cuéntanos tu proyecto",
+    metaTitle: "Hablemos de tu marca",
     metaDescription:
-      "Responde un cuestionario de 3 minutos sobre tu marca y te contactamos en menos de 24 horas hábiles para agendar la llamada de descubrimiento.",
-    title: "Cuéntanos tu proyecto",
+      "Agenda una llamada de 20 minutos con CREE o escríbenos por WhatsApp. Llegamos preparados y te enviamos una propuesta a tu medida en 24 horas.",
+    title: "Hablemos de tu marca",
     intro:
-      "Antes de hablar de presupuesto, queremos entender tu negocio. El cuestionario toma unos 3 minutos y nos permite preparar una propuesta a tu medida. Si encajamos, te respondemos en menos de 24 horas hábiles con el enlace para agendar la llamada.",
+      "Antes de hablar de presupuesto, queremos entender tu negocio. Elige cómo prefieres empezar: agenda una llamada o escríbenos directo.",
+    call: {
+      eyebrow: "Recomendado",
+      title: "Agenda una llamada",
+      meta: "20 minutos",
+      text: "Responde unas preguntas rápidas (toma 2 minutos) y llegamos a la llamada ya preparados, con una propuesta pensada para ti.",
+      asks: ["Tu marca", "Qué necesitas", "Tu presupuesto", "Tu WhatsApp"],
+      cta: "Elegir día y hora",
+    },
+    whatsapp: {
+      title: "Escríbenos por WhatsApp",
+      text: "¿Prefieres escribir? Cuéntanos qué necesita tu marca y te respondemos en horario laboral.",
+      cta: "Abrir WhatsApp",
+      message: "Hola CREE, quiero hablar sobre mi marca.",
+      messageService: "Hola CREE, me interesa {service} para mi marca.",
+    },
+    next: {
+      title: "Qué pasa después",
+      steps: [
+        { name: "Agendas o nos escribes", text: "Por la llamada o por WhatsApp, como te quede mejor." },
+        { name: "Revisamos lo que nos cuentas", text: "Llegamos a la conversación sabiendo qué necesitas." },
+        { name: "Hablamos", text: "Una llamada directa, sin rodeos y sin compromiso." },
+        { name: "Tu propuesta en 24 h", text: "Una cotización a tu medida, con todo claro. Sin letra chica." },
+      ],
+    },
     form: {
       stepOf: "Paso {current} de {total}",
       next: "Continuar",

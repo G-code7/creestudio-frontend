@@ -158,6 +158,17 @@ export type Dictionary = {
     metaDescription: string;
     title: string;
     intro: string;
+    call: { eyebrow: string; title: string; meta: string; text: string; asks: string[]; cta: string };
+    whatsapp: {
+      title: string;
+      text: string;
+      cta: string;
+      /** Mensaje ya escrito. Con `{service}` cuando llegan desde un servicio. */
+      message: string;
+      messageService: string;
+    };
+    next: { title: string; steps: { name: string; text: string }[] };
+    /** Formulario largo anterior (QualifyForm), fuera de uso. */
     form: FormCopy;
   };
   privacy: {

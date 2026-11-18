@@ -50,7 +50,7 @@ export default async function ServicesPage({ params }: PageProps) {
         <ServicesIndex locale={locale} dict={dict} headingLevel="h2" projects={projects} />
       </section>
 
-      <Packages
+      {/* <Packages
         id="paquetes"
         title={dict.services.packages.title}
         intro={dict.services.packages.intro}
@@ -65,7 +65,7 @@ export default async function ServicesPage({ params }: PageProps) {
         cadence={dict.services.perMonth}
         items={dict.services.retainer.items}
         labels={labels}
-      />
+      /> */}
 
       <CtaBand
         title={dict.home.cta.title}
