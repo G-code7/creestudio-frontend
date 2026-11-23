@@ -10,18 +10,21 @@ type Slot = {
   sm: [number, number];
   lg: [number, number];
   nudge?: string;
+  offset?: [number, number];
+  w?: string;
+  h?: string;
 };
 
 const SLOTS: Slot[] = [
   { ratio: "4 / 5", sm: [1, 1], lg: [1, 1] },
-  { ratio: "1 / 1", sm: [2, 2], lg: [3, 1] },
+  { ratio: "4 / 3", sm: [2, 2], lg: [3, 1], offset: [-60, 70] },
   { ratio: "3 / 4", sm: [1, 3], lg: [2, 2] },
-  { ratio: "4 / 3", sm: [2, 4], lg: [1, 3] },
-  { ratio: "4 / 5", sm: [1, 5], lg: [2, 4] },
-  { ratio: "3 / 4", sm: [2, 6], lg: [3, 4], nudge: "lg:-mt-32" },
-  { ratio: "1 / 1", sm: [1, 7], lg: [1, 5] },
-  { ratio: "4 / 5", sm: [2, 8], lg: [3, 5] },
-  { ratio: "4 / 3", sm: [1, 9], lg: [2, 6] },
+  { ratio: "1 / 1", sm: [2, 4], lg: [1, 3], offset: [80, 0]},
+  { ratio: "4 / 6", sm: [1, 5], lg: [2, 4] },
+  { ratio: "4 / 3", sm: [2, 6], lg: [3, 4], nudge: "lg:-mt-32", offset: [0, -130] },
+  { ratio: "3 / 4", sm: [1, 7], lg: [1, 5], offset: [0, 60] },
+  { ratio: "8 / 4", sm: [2, 8], lg: [3, 5], offset: [-120, 80], w: "125%" },
+  { ratio: "2 / 3", sm: [1, 9], lg: [2, 6] },
 ];
 
 /* Portadas en cualquier formato: imagen (jpg, png, webp, gif) o vídeo (mp4, webm). */
@@ -88,12 +91,12 @@ export default function ProjectMosaic({ projects }: ProjectMosaicProps) {
               })
               .fromTo(
                 figure,
-                { clipPath: "inset(18% 8% 0% 8% round 28px)", yPercent: 10 },
-                { clipPath: "inset(0% 0% 0% 0% round 16px)", yPercent: 0, ease: "power2.out", duration: 0.35 }
+                { clipPath: "inset(18% 8% 0% 8%)", yPercent: 10 },
+                { clipPath: "inset(0% 0% 0% 0%)", yPercent: 0, ease: "power2.out", duration: 0.35 }
               )
               .to(figure, { duration: 0.3 })
               .to(figure, {
-                clipPath: "inset(0% 5% 14% 5% round 24px)",
+                clipPath: "inset(0% 5% 14% 5%)",
                 yPercent: -6,
                 ease: "power2.in",
                 duration: 0.35,
@@ -137,21 +140,23 @@ export default function ProjectMosaic({ projects }: ProjectMosaicProps) {
             data-slot
             data-col-sm={slot.sm[0]}
             data-col-lg={slot.lg[0]}
-            className={`mosaic-slot ${slot.nudge ?? ""}`}
+            className={`mosaic-slot lg:[translate:var(--tx,0)_var(--ty,0)] ${slot.nudge ?? ""}`}
             style={
               {
                 "--c": slot.sm[0],
                 "--r": slot.sm[1],
                 "--c-lg": slot.lg[0],
                 "--r-lg": slot.lg[1],
+                "--tx": slot.offset ? `${slot.offset[0]}px` : undefined,
+                "--ty": slot.offset ? `${slot.offset[1]}px` : undefined,
               } as React.CSSProperties
             }
           >
             <figure
               data-figure
               aria-hidden
-              className="relative overflow-hidden rounded-2xl bg-mist [clip-path:inset(0_round_16px)]"
-              style={{ aspectRatio: slot.ratio }}
+              className="relative overflow-hidden bg-mist"
+              style={{ aspectRatio: slot.ratio, width: slot.w, height: slot.h }}
             >
               {hasImage ? (
                 <div data-media className="absolute inset-0 will-change-transform">
@@ -201,11 +206,11 @@ export default function ProjectMosaic({ projects }: ProjectMosaicProps) {
                 <div className={`size-full ${PLACEHOLDERS[i % PLACEHOLDERS.length]}`} />
               )}
               {/* Filo interior muy sutil: separa la imagen del lavanda sin sombra pesada */}
-              <span aria-hidden className="pointer-events-none absolute inset-0 z-20 rounded-[inherit] ring-1 ring-inset ring-ink/10" />
+              <span aria-hidden className="pointer-events-none absolute inset-0 z-20 ring-1 ring-inset ring-ink/10" />
             </figure>
           </div>
         );
       })}
     </div>
   );
-}
+}

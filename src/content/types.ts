@@ -100,15 +100,20 @@ export type Dictionary = {
   };
   hero: { title: string; subtitle: string };
   home: {
-    stakes: {
+    whyCree: {
+      eyebrow: string;
       title: string;
-      signal: string;
-      answerLabel: string;
-      outro: string;
-      items: { fear: string; answer: string }[];
+      items: { title: string; text: string }[];
     };
     services: { title: string };
     work: { title: string; all: string };
+    /** "Así trabajamos" del home: filas numeradas. */
+    howWeWork: {
+      title: string;
+      intro: string;
+      steps: { name: string; text: string }[];
+    };
+    /** Proceso con línea curva (Process + ProcessPath), reservado para las landings de servicios. */
     process: {
       title: string;
       intro: string;
@@ -153,6 +158,17 @@ export type Dictionary = {
     metaDescription: string;
     title: string;
     intro: string;
+    call: { eyebrow: string; title: string; meta: string; text: string; asks: string[]; cta: string };
+    whatsapp: {
+      title: string;
+      text: string;
+      cta: string;
+      /** Mensaje ya escrito. Con `{service}` cuando llegan desde un servicio. */
+      message: string;
+      messageService: string;
+    };
+    next: { title: string; steps: { name: string; text: string }[] };
+    /** Formulario largo anterior (QualifyForm), fuera de uso. */
     form: FormCopy;
   };
   privacy: {

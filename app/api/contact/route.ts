@@ -44,7 +44,7 @@ async function sendEmail(lead: Lead): Promise<void> {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      from: process.env.RESEND_FROM ?? "Cree Studio <onboarding@resend.dev>",
+      from: process.env.RESEND_FROM ?? "Cree Estudio <onboarding@resend.dev>",
       to: [process.env.CONTACT_TO_EMAIL],
       reply_to: lead.email,
       subject: `Nuevo lead: ${lead.company} (${lead.budget})`,

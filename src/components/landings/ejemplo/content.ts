@@ -10,7 +10,7 @@ export const content: Record<Locale, LandingContent> = {
   es: {
     meta: {
       title: "Landing de ejemplo",
-      description: "Plantilla de landing de campaña de Cree Studio.",
+      description: "Plantilla de landing de campaña de Cree Estudio.",
     },
     hero: {
       eyebrow: "Oferta de ejemplo · cupos limitados",
@@ -20,7 +20,7 @@ export const content: Record<Locale, LandingContent> = {
       primary: "Quiero empezar",
       secondary: "Ver qué incluye",
       note: "Respuesta en 24 h · Sin compromiso",
-      badge: "CREE STUDIO • OFERTA DE EJEMPLO • ",
+      badge: "Cree Estudio • OFERTA DE EJEMPLO • ",
     },
     benefits: {
       title: "Por qué esta oferta tiene sentido",
@@ -66,7 +66,7 @@ export const content: Record<Locale, LandingContent> = {
   en: {
     meta: {
       title: "Example landing page",
-      description: "Cree Studio campaign landing page template.",
+      description: "Cree Estudio campaign landing page template.",
     },
     hero: {
       eyebrow: "Example offer · limited spots",
@@ -76,7 +76,7 @@ export const content: Record<Locale, LandingContent> = {
       primary: "I want to start",
       secondary: "See what’s included",
       note: "Reply within 24 h · No commitment",
-      badge: "CREE STUDIO • EXAMPLE OFFER • ",
+      badge: "Cree Estudio • EXAMPLE OFFER • ",
     },
     benefits: {
       title: "Why this offer makes sense",

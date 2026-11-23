@@ -7,20 +7,14 @@ import Words from "@/src/components/ui/Words";
 type ServicesHeroProps = {
   title: string;
   intro: string;
-  /** Número de disciplinas y su etiqueta ("05 disciplinas"). */
   count: number;
   countLabel: string;
-  /** Atajos a las secciones de la página. */
+
   nav: { label: string; href: string }[];
 };
 
 const pad = (n: number) => String(n).padStart(2, "0");
 
-/*
- * Cabecera de /servicios: título grande que sube desde una máscara, la cifra de
- * disciplinas en contorno lavanda y atajos a disciplinas, paquetes y continuidad.
- * Un halo lavanda (el tono con que termina el hero del home) flota detrás.
- */
 export default function ServicesHero({ title, intro, count, countLabel, nav }: ServicesHeroProps) {
   const root = useRef<HTMLElement>(null);
 
@@ -60,14 +54,14 @@ export default function ServicesHero({ title, intro, count, countLabel, nav }: S
 
       <div className="container-site grid gap-10 pt-36 pb-16 md:grid-cols-12 md:items-end md:gap-8 md:pt-48 md:pb-24">
         <div className="md:col-span-7">
-          <p data-count className="flex items-end gap-3">
+          {/* <p data-count className="flex items-end gap-3">
             <span className="font-display text-7xl leading-none font-bold tracking-tighter text-transparent [-webkit-text-stroke:2px_var(--color-cree)] md:text-9xl">
               {pad(count)}
             </span>
             <span className="pb-2 font-sans text-sm font-semibold uppercase tracking-[0.18em] text-brand-ink md:pb-4">
               {countLabel}
             </span>
-          </p>
+          </p> */}
           <h1 className="mt-4 font-display text-6xl font-bold leading-[0.95] tracking-tight text-ink sm:text-7xl md:text-[8.5rem]">
             <Words text={title} />
           </h1>
@@ -77,7 +71,7 @@ export default function ServicesHero({ title, intro, count, countLabel, nav }: S
           <p data-fade className="max-w-md font-sans text-lg leading-relaxed text-slate md:text-xl">
             {intro}
           </p>
-          <nav data-fade aria-label={title} className="mt-8 flex flex-wrap gap-2">
+          {/* <nav data-fade aria-label={title} className="mt-8 flex flex-wrap gap-2">
             {nav.map((item) => (
               <a
                 key={item.href}
@@ -87,7 +81,7 @@ export default function ServicesHero({ title, intro, count, countLabel, nav }: S
                 {item.label}
               </a>
             ))}
-          </nav>
+          </nav> */}
         </div>
       </div>
     </header>

@@ -4,26 +4,27 @@ import { useRef } from "react";
 import { gsap, useGSAP } from "@/src/lib/gsap";
 
 /*
- * Naming: la exploración. Cuatro rodillos de letras giran como una máquina
- * tragamonedas, cada uno se detiene un poco después del anterior y juntos
- * forman un nombre. Cada cierto tiempo vuelven a girar y prueban otro.
+ * Rodillos de letras: giran como una máquina tragamonedas, cada uno se
+ * detiene un poco después del anterior y juntos forman una palabra de cuatro
+ * letras. Cada cierto tiempo vuelven a girar y prueban otra.
  * Letras fijas (no aleatorias) para que el servidor y el cliente coincidan.
  */
 const NAMES = ["CREE", "ALMA", "NOVA", "RUMO"];
 const FILLER = "BKXMOTSPLAQVDGHZ";
 const SPINS = 12; // letras de relleno por giro
 
-/** Columna de cada rodillo: relleno + letra final de cada nombre, en orden. */
-function reel(col: number): string[] {
+/** Columna de cada rodillo: relleno + letra final de cada palabra, en orden. */
+function reel(col: number, words: string[]): string[] {
   const letters: string[] = [];
-  NAMES.forEach((name, n) => {
+  words.forEach((name, n) => {
     for (let k = 0; k < SPINS; k++) letters.push(FILLER[(k * 5 + col * 3 + n * 7) % FILLER.length]);
     letters.push(name[col]);
   });
   return letters;
 }
 
-export default function NamingReels({ accent }: { accent: string }) {
+/** `names`: palabras de 4 letras que van formando los rodillos. */
+export default function NamingReels({ accent, names = NAMES }: { accent: string; names?: string[] }) {
   const root = useRef<HTMLDivElement>(null);
 
   useGSAP(
@@ -33,12 +34,12 @@ export default function NamingReels({ accent }: { accent: string }) {
       const step = SPINS + 1;
 
       // Sin movimiento: se muestra directamente el primer nombre.
-      gsap.set(strips, { yPercent: (-100 * (step - 1)) / (step * NAMES.length) });
+      gsap.set(strips, { yPercent: (-100 * (step - 1)) / (step * names.length) });
 
       gsap.matchMedia().add("(prefers-reduced-motion: no-preference)", () => {
         const tl = gsap.timeline({ repeat: -1, delay: 0.3 });
-        NAMES.forEach((_, n) => {
-          const target = (-100 * (n * step + step - 1)) / (step * NAMES.length);
+        names.forEach((_, n) => {
+          const target = (-100 * (n * step + step - 1)) / (step * names.length);
           strips.forEach((s, col) => {
             tl.to(s, { yPercent: target, duration: 1.4 + col * 0.25, ease: "power3.inOut" }, n * 4.2);
           });
@@ -66,7 +67,7 @@ export default function NamingReels({ accent }: { accent: string }) {
             className="relative h-20 w-14 overflow-hidden rounded-xl border border-paper/15 bg-paper/[0.04] md:h-28 md:w-20"
           >
             <div data-strip className="flex flex-col">
-              {reel(col).map((letter, i) => (
+              {reel(col, names).map((letter, i) => (
                 <span
                   key={i}
                   className="flex h-20 items-center justify-center font-display text-4xl font-bold md:h-28 md:text-6xl"

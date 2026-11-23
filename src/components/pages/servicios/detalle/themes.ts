@@ -18,12 +18,12 @@ export type ServiceTheme = {
 export const serviceThemes: Record<ServiceSlug, ServiceTheme> = {
   // Estrategia: el núcleo de la marca, sobre su lavanda.
   branding: { panel: "bg-cree text-ink", muted: "text-ink/75", accent: "#ffffff", dark: false },
-  // Sistema visual: blanco con retícula de construcción.
-  "identidad-visual": { panel: "bg-paper text-ink ring-1 ring-line", muted: "text-slate", accent: "#917fc0", dark: false },
-  // Palabras: negro, como una hoja en blanco al revés.
-  naming: { panel: "bg-ink text-paper", muted: "text-paper/70", accent: "#917fc0", dark: true },
-  // Objeto físico: gris claro de mesa de trabajo.
-  packaging: { panel: "bg-mist text-ink", muted: "text-slate", accent: "#917fc0", dark: false },
+  // Feed: negro, como una pantalla apagada que se enciende.
+  contenido: { panel: "bg-ink text-paper", muted: "text-paper/70", accent: "#917fc0", dark: true },
   // Pantalla: violeta profundo.
   "diseno-web": { panel: "bg-brand-ink text-paper", muted: "text-paper/75", accent: "#ffffff", dark: true },
+  // Objeto físico: gris claro de mesa de trabajo.
+  packaging: { panel: "bg-mist text-ink", muted: "text-slate", accent: "#917fc0", dark: false },
+  // Espacio: blanco con retícula, como el plano de un montaje.
+  eventos: { panel: "bg-paper text-ink ring-1 ring-line", muted: "text-slate", accent: "#917fc0", dark: false },
 };

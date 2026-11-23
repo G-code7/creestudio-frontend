@@ -27,7 +27,8 @@ export default function ServicesIndex({ locale, dict, headingLevel = "h3", proje
     if (covers[0]) used.add(covers[0]);
     return {
       slug,
-      href: localizePath(locale, `servicios/${slug}`),
+      // href: localizePath(locale, `servicios/${slug}`),
+      href: localizePath(locale, `contacto/`),
       name: dict.services.items[slug].name,
       short: dict.services.items[slug].short,
       previews: covers,
